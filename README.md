@@ -1,8 +1,11 @@
-# knowledge-representation
+# Knowledge Representation
 
 `git clone https://github.com/master-k30-hcmus/knowledge-representation.git`
 
-# Assigment submission
+# Google Classroom
+Code: h2sesjm
+
+# Assigment Submission
 
 - \[BT1\]-Nhom04
 
