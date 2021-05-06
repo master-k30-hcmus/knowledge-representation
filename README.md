@@ -7,15 +7,15 @@ Code: h2sesjm
 
 # Assigment Submission
 
-- \[BT1\]-Nhom04
+- \[BT1\]-Nhom07
 
 	- DanhSachNhom
 	
-		- Nhom04.xlsx (Tên-MSHV-Lớp)
+		- Nhom07.xlsx (Tên-MSHV-Lớp)
 		
 	- Cau01/
 	
-		- Nhom04-Cau01.pdf
+		- Nhom07-Cau01.pdf
 		
 		- demo or clip (nếu có)
 		
