@@ -8,12 +8,12 @@
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
 
-from PySide2.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
-                            QRect, QSize, QUrl, Qt)
-from PySide2.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
-                           QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
-                           QRadialGradient)
-from PySide2.QtWidgets import *
+from PyQt5.QtCore import (QCoreApplication, QMetaObject, QObject, QPoint,
+    QRect, QSize, QUrl, Qt)
+from PyQt5.QtGui import (QBrush, QColor, QConicalGradient, QCursor, QFont,
+    QFontDatabase, QIcon, QLinearGradient, QPalette, QPainter, QPixmap,
+    QRadialGradient)
+from PyQt5.QtWidgets import *
 
 
 class Ui_MainWindow(object):
@@ -66,10 +66,10 @@ class Ui_MainWindow(object):
         font2 = QFont()
         font2.setPointSize(10)
         self.btnInputEquationsFromFile.setFont(font2)
-        self.pushButton = QPushButton(self.grpEquations)
-        self.pushButton.setObjectName(u"pushButton")
-        self.pushButton.setGeometry(QRect(240, 310, 71, 31))
-        self.pushButton.setFont(font2)
+        self.btnClear = QPushButton(self.grpEquations)
+        self.btnClear.setObjectName(u"btnClear")
+        self.btnClear.setGeometry(QRect(240, 310, 71, 31))
+        self.btnClear.setFont(font2)
         self.inputEquations = QTextEdit(self.grpEquations)
         self.inputEquations.setObjectName(u"inputEquations")
         self.inputEquations.setGeometry(QRect(10, 70, 301, 231))
@@ -117,29 +117,25 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
-
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"ChemistryLab-Nhom07", None))
-        # if QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
         self.btnLab.setToolTip(QCoreApplication.translate("MainWindow", u"Laboratory", None))
-        # endif // QT_CONFIG(tooltip)
+#endif // QT_CONFIG(tooltip)
         self.btnLab.setText("")
-        self.txtTitle.setText(
-            QCoreApplication.translate("MainWindow", u"\u0110I\u1ec0U CH\u1ebe CH\u1ea4T H\u00d3A H\u1eccC", None))
-        self.grpProduceSteps.setTitle(
-            QCoreApplication.translate("MainWindow", u"C\u00e1c b\u01b0\u1edbc th\u1ef1c hi\u1ec7n", None))
-        self.grpEquations.setTitle(
-            QCoreApplication.translate("MainWindow", u"Ph\u01b0\u01a1ng tr\u00ecnh h\u00f3a h\u1ecdc", None))
-        # if QT_CONFIG(tooltip)
+        self.txtTitle.setText(QCoreApplication.translate("MainWindow", u"\u0110I\u1ec0U CH\u1ebe CH\u1ea4T H\u00d3A H\u1eccC", None))
+        self.grpProduceSteps.setTitle(QCoreApplication.translate("MainWindow", u"C\u00e1c b\u01b0\u1edbc th\u1ef1c hi\u1ec7n", None))
+        self.grpEquations.setTitle(QCoreApplication.translate("MainWindow", u"Ph\u01b0\u01a1ng tr\u00ecnh h\u00f3a h\u1ecdc", None))
+#if QT_CONFIG(tooltip)
         self.btnInputEquationsFromFile.setToolTip("")
-        # endif // QT_CONFIG(tooltip)
-        self.btnInputEquationsFromFile.setText(
-            QCoreApplication.translate("MainWindow", u"Ch\u1ecdn t\u1eeb file", None))
-        self.pushButton.setText(QCoreApplication.translate("MainWindow", u"X\u00f3a", None))
+#endif // QT_CONFIG(tooltip)
+        self.btnInputEquationsFromFile.setText(QCoreApplication.translate("MainWindow", u"Ch\u1ecdn t\u1eeb file", None))
+        self.btnClear.setText(QCoreApplication.translate("MainWindow", u"X\u00f3a", None))
         self.grpProblem.setTitle(QCoreApplication.translate("MainWindow", u"\u0110i\u1ec1u ch\u1ebf", None))
         self.btnTo.setText("")
         self.menuAuthors.setTitle(QCoreApplication.translate("MainWindow", u"Nh\u00f3m 07", None))
         self.menuRefresh.setTitle(QCoreApplication.translate("MainWindow", u"Th\u00ed nghi\u1ec7m m\u1edbi", None))
     # retranslateUi
+

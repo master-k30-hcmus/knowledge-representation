@@ -1,0 +1,8 @@
+2Na+Cl_2 = 2NaCl
+2Fe + 3Cl_2 = 2FeCl_3
+Cu + Cl_2 = CuCl_2
+Cl_2 + H2O = HCl + HClO
+MnO_2 + 4HCl = MnCl_2 + Cl_2 + 2H_2O
+16HCl + 2KMnO_4 = 2KCl + 2MnCl_2 + 8H_2O +5Cl_2
+2NaCl + 2H_2O = Cl_2 + H_2 + 2NaOH
+2K + Cl_2 = 2KCl

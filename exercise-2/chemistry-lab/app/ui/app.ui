@@ -44,40 +44,6 @@
      </size>
     </property>
    </widget>
-   <widget class="QLineEdit" name="txtTitle">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>20</y>
-      <width>441</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="font">
-     <font>
-      <family>Montserrat</family>
-      <pointsize>16</pointsize>
-     </font>
-    </property>
-    <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
-    </property>
-    <property name="mouseTracking">
-     <bool>false</bool>
-    </property>
-    <property name="autoFillBackground">
-     <bool>false</bool>
-    </property>
-    <property name="text">
-     <string>ĐIỀU CHẾ CHẤT HÓA HỌC</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignCenter</set>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
    <widget class="QGroupBox" name="grpProduceSteps">
     <property name="geometry">
      <rect>
@@ -89,8 +55,10 @@
     </property>
     <property name="font">
      <font>
-      <family>Montserrat</family>
+      <family>Tahoma</family>
       <pointsize>12</pointsize>
+      <weight>50</weight>
+      <bold>false</bold>
      </font>
     </property>
     <property name="title">
@@ -108,6 +76,9 @@
      <property name="readOnly">
       <bool>true</bool>
      </property>
+     <property name="plainText">
+      <string/>
+     </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="grpEquations">
@@ -121,7 +92,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Montserrat</family>
+      <family>Tahoma</family>
       <pointsize>12</pointsize>
      </font>
     </property>
@@ -139,6 +110,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Tahoma</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -149,7 +121,7 @@
       <string>Chọn từ file</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="btnClear">
      <property name="geometry">
       <rect>
        <x>240</x>
@@ -160,6 +132,7 @@
      </property>
      <property name="font">
       <font>
+       <family>Tahoma</family>
        <pointsize>10</pointsize>
       </font>
      </property>
@@ -189,7 +162,7 @@
     </property>
     <property name="font">
      <font>
-      <family>Montserrat</family>
+      <family>Tahoma</family>
       <pointsize>12</pointsize>
      </font>
     </property>
@@ -204,6 +177,9 @@
        <width>211</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="text">
+      <string/>
      </property>
     </widget>
     <widget class="QLineEdit" name="inputTargetChemistry">
@@ -249,11 +225,58 @@
      </property>
     </widget>
    </widget>
+   <widget class="QLabel" name="txtTitle">
+    <property name="geometry">
+     <rect>
+      <x>250</x>
+      <y>20</y>
+      <width>381</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>18</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>ĐIỀU CHẾ CHẤT HÓA HỌC</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="txtProcessing">
+    <property name="geometry">
+     <rect>
+      <x>390</x>
+      <y>490</y>
+      <width>101</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Tahoma</family>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Processing</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
+   </widget>
    <zorder>grpProblem</zorder>
    <zorder>grpEquations</zorder>
    <zorder>grpProduceSteps</zorder>
    <zorder>btnLab</zorder>
    <zorder>txtTitle</zorder>
+   <zorder>txtProcessing</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -261,7 +284,7 @@
      <x>0</x>
      <y>0</y>
      <width>872</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAuthors">
@@ -274,8 +297,14 @@
      <string>Thí nghiệm mới</string>
     </property>
    </widget>
+   <widget class="QMenu" name="menuChemistryLab">
+    <property name="title">
+     <string>ChemistryLab</string>
+    </property>
+   </widget>
    <addaction name="menuRefresh"/>
    <addaction name="menuAuthors"/>
+   <addaction name="menuChemistryLab"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
