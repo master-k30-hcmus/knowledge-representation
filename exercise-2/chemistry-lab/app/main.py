@@ -1,20 +1,18 @@
 import sys
 from time import sleep
 
+from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QMainWindow
 )
 
-from PyQt5.uic import loadUi
-import lab
-
-# from ui.app_ui import Ui_MainWindow
+from lab import process
 
 class Window(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
         # self.setupUi(self)
-        loadUi('D:/master-k30-hcmus/knowledge-representation/exercise-2/chemistry-lab/app/ui/app.ui',self)
+        loadUi('D:/master-k30-hcmus/knowledge-representation/exercise-2/chemistry-lab/app/ui/app.ui', self)
 
 
         # Chemistry input
@@ -33,16 +31,26 @@ class Window(QMainWindow):
     def get_text(self):
         mytext = self.inputSourceChemistry.text()
         print(mytext)
-        return
+        return mytext
 
-    def set_text(self):
-        self.txtProduceSteps.setPlainText("hello world!")
-        return
+    def set_produce_steps_text(self, text: str):
+        self.txtProduceSteps.setPlainText(text)
 
     def process_lab(self):
         self.get_text()
-        sleep(4)
-        self.set_text()
+        solutions = process()
+
+        unKnownChemistry = ['NaOH']
+
+        txt_shown = ""
+        for i, solution in enumerate(solutions):
+            txt_shown += f"Ta cần điều chế {unKnownChemistry[i]}\n"
+            for index, step in enumerate(solution):
+                txt_shown += f"\nĐiều chế lần {index + 1}\n"
+                txt_shown += f"Ta điều chế được {step[1].vars_VP} thông qua {step[1].name}\n"
+                txt_shown += f"{step[1].vars_VT} => {step[1].vars_VP}\n"
+
+                self.set_produce_steps_text(txt_shown)
         return
 
 

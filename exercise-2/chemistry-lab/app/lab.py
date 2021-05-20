@@ -164,10 +164,5 @@ def process():
         problem.setUnknownVar(chemistry)
         solutions.append(problem.slove())
 
-    for i, solution in enumerate(solutions):
-        print(f"Ta cần điều chế {unKnownChemistry[i]}")
-        for index, step in enumerate(solution):
-            print(f"Điều chế lần {index + 1}")
-            print(f"Ta điều chế được {step[1].vars_VP} thông qua {step[1].name}")
-            print(f"{step[1].vars_VT} => {step[1].vars_VP}")
-            print("\n")
+    return solutions
+
