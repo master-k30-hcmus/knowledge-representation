@@ -1,0 +1,1 @@
+uic ../../../../app.ui -o ../../../../app.py -g python

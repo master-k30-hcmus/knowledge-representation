@@ -274,3 +274,10 @@ TSWLatexianTemp*
 
 # Makeindex log files
 *.lpz
+
+*.spec
+exercise-2/chemistry-lab/.idea/
+exercise-2/chemistry-lab/__pycache__/
+exercise-2/chemistry-lab/venv/
+exercise-2/chemistry-lab/build/
+exercise-2/chemistry-lab/dist/
