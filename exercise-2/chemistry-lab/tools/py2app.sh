@@ -13,7 +13,7 @@ while [ "$#" -gt 0 ]; do
     esac
 done
 
-OUTPUT_DIR="../$APP_NAME"
+OUTPUT_DIR="./$APP_NAME"
 mkdir -p "$OUTPUT_DIR"
 echo "OUTPUT_DIR=" $OUTPUT_DIR
 

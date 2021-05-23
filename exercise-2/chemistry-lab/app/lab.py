@@ -8,6 +8,7 @@ Original file is located at
 """
 
 from re import sub
+from typing import List
 
 
 class EQUATION:
@@ -41,18 +42,17 @@ class PROBLEM:
     steps = []  # lưu các bước giải bài toán
 
     def clear(self):
-        self.knownVar.clear()
-        self.unknownVar.clear()
+        self.known_vars.clear()
+        self.unknown_vars = None
         self.steps.clear()
-        self.unknownVar = -1
 
     # Cài đặt hóa chất nào đã biết
-    def set_unknown_var(self, var):
-        self.unknownVar = var
+    def set_unknown_var(self, vars):
+        self.unknown_vars = vars
 
     # Cài đặt hóa chất nào chưa biết
     def set_known_vars(self, vars):
-        self.knownVars = vars
+        self.known_vars = vars
 
     # Thêm tri thức (phương trình) vào bài toán
     def set_equation_list(self, equations):
@@ -62,14 +62,14 @@ class PROBLEM:
     def get_num_known_vars(self, equation):
         count = 0
         for var in equation.vars_VT:
-            if (var in self.knownVars):
+            if var in self.known_vars:
                 count += 1
         return count
 
     # Trả về yếu tố chưa biết trong phương trình
     def get_unknown_vars(self, equation):
         for var in equation.vars_VP:
-            if (var not in self.knownVars):
+            if var not in self.known_vars:
                 return var
 
     # Trả về các hóa chát có thể điều chế được, trả về kết quả điều chế
@@ -79,9 +79,9 @@ class PROBLEM:
         return -1
 
     # Kích hoạt hóa chất nào có thể điều chế
-    def active_var(self, knownVar):
-        for var in knownVar:
-            self.knownVars.append(var)
+    def active_var(self, known_var):
+        for var in known_var:
+            self.known_vars.append(var)
 
     # Thêm bước giải
     def add_step(self, var, equation):
@@ -89,22 +89,24 @@ class PROBLEM:
 
     # Kiểm tra điều chế thành công chưa?
     def is_success(self):
-        if (self.unknownVar in self.knownVars):
+        if self.unknown_vars in self.known_vars:
             return True
         return False
 
     # Giải bài toán
     def solve(self):
         flag = True
-        while (flag):
+        while flag:
             flag = False
+            print('self.equations', len(self.equations))
+            print('self.steps', len(self.steps))
             for equation in self.equations:
-                knownVar = self.get_known_vars(equation)
-                if (knownVar != -1):
-                    self.active_var(knownVar)
-                    self.add_step(knownVar, equation)
+                known_var = self.get_known_vars(equation)
+                if known_var != -1:
+                    self.active_var(known_var)
+                    self.add_step(known_var, equation)
                     flag = True
-                    if (self.is_success()):
+                    if self.is_success():
                         temp = []
                         solutions = temp
                         for step in self.steps:
@@ -113,15 +115,30 @@ class PROBLEM:
         return [False, "Bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức."]
 
 
-def get_data_from_file(file_path: str):
-    file = open(file_path, "r")
-    eq_list = []
-    for line in file.readlines():
-        temp = sub('\s+', '', line).split(sep="=")
+def clean_equation(line):
+    temp = sub('\s+', '', line).split(sep="=")
+    if len(temp) == 2:
         vars_VT = [sub("(^\d+)", "", var) for var in temp[0].split(sep="+")]
         vars_VP = [sub("(^\d+)", "", var) for var in temp[1].split(sep="+")]
-        eq_list.append([vars_VT, vars_VP])
-    file.close()
+        return [vars_VT, vars_VP]
+    return [[], []]
+
+
+def get_equation_list(texts):
+    eq_list = []
+    for line in texts:
+        eq_list.append(clean_equation(line))
+    return eq_list
+
+
+def get_data(file_path: str = None, text_list: List[str] = None):
+    eq_list = []
+    if file_path:
+        file = open(file_path, "r")
+        eq_list = get_equation_list(file.readlines())
+        file.close()
+    elif text_list:
+        eq_list = get_equation_list(text_list)
     return eq_list
 
 
@@ -130,12 +147,13 @@ def preprocess_input(text):
 
 
 def process(given, unknown, data):
+    print("Equation list:")
     eq_list = []
     for i, row in enumerate(data):
-        print(row)
+        print(i, row)
         eq = EQUATION("công thức " + str(i+1), row[0], row[1])
         eq_list.append(eq)
-
+    
     problem = PROBLEM()
     problem.set_equation_list(eq_list)
 
@@ -143,9 +161,17 @@ def process(given, unknown, data):
         given.append('O_2')
     problem.set_known_vars(given)
 
+    print("Given chemistry:", given)
+    print("Unknown chemistry:", unknown)
+
+    print("Find solutions:")
     solutions = []
     for chemistry in unknown:
+        print(f"for {chemistry}:")
         problem.set_unknown_var(chemistry)
-        solutions.append(problem.solve())
+        solved = problem.solve()
+        solutions.append(solved)
+        print(solved)
+    problem.clear()
 
     return solutions

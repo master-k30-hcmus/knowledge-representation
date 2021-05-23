@@ -5,7 +5,7 @@ from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QFileDialog, qApp
 from PyQt5.QtCore import QDir
 
-from lab import preprocess_input, process, get_data_from_file
+from lab import preprocess_input, process, get_data
 
 
 class Window(QMainWindow):
@@ -16,13 +16,13 @@ class Window(QMainWindow):
 
         # Equations input
         self.btnBrowseFile.clicked.connect(self.get_file)
-        self.btnClear.clicked.connect(self.init_equation_group)
+        self.btnClear.clicked.connect(self.clear_equation_group)
 
         # Lab process
         self.btnProcessLab.clicked.connect(self.process_lab)
 
         # Menu bar handle
-        self.actionNew.triggered.connect(self.init_states)
+        self.actionNew.triggered.connect(self.clear_all_groups)
         self.actionAuthorInfo.triggered.connect(self.info_authors)
         self.actionLabInfo.triggered.connect(self.info_lab)
         self.actionExit.triggered.connect(qApp.quit)
@@ -55,7 +55,7 @@ class Window(QMainWindow):
 
         file.close()
 
-    def init_equation_group(self):
+    def clear_equation_group(self):
         self.file_path = ""
         self.txtFilename.setText("")
 
@@ -63,15 +63,17 @@ class Window(QMainWindow):
         self.txtEquationList.setReadOnly(False)
 
         self.txtEquationListStatus.setText("")
+        
+    def clear_steps_group(self):
+        self.txtProduceSteps.setPlainText("")
+        self.txtLabStatus.setText("")
 
-    def init_states(self):
+    def clear_all_groups(self):
         self.txtGivenChemistry.setText("")
         self.txtUnknownChemistry.setText("")
 
-        self.init_equation_group()
-
-        self.txtProduceSteps.setPlainText("")
-        self.txtLabStatus.setText("")
+        self.clear_equation_group()
+        self.clear_steps_group()
 
     def set_produce_steps_text(self, text: str):
         self.txtProduceSteps.setPlainText(text)
@@ -100,7 +102,14 @@ class Window(QMainWindow):
             self.set_lab_status(text='Thiếu dữ liệu cần thiết', status='error')
             return
 
-        data = get_data_from_file(self.file_path)
+        self.clear_steps_group()
+
+        if self.file_path:
+            data = get_data(file_path=self.file_path)
+        else:
+            texts = self.txtEquationList.toPlainText().split(sep='\n')
+            data = get_data(text_list=texts)
+            self.txtEquationListStatus.setText(f"Đã nhập {len(texts)} phương trình.")
 
         self.set_lab_status(text='Đang xử lý', status='processing')
         solutions = process(given, unknown, data)
