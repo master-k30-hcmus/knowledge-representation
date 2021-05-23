@@ -7,21 +7,18 @@ Original file is located at
     https://colab.research.google.com/drive/1NnLk_isWSmoCcncWlkf3oKH4Lues-Gku
 """
 
+from re import sub, compile, IGNORECASE
+
 
 class EQUATION:
     vars = []
     vars_VP = []
     vars_VT = []
-    names = []
 
-    def __init__(self, name, *vars):
+    def __init__(self, name, vars_VT, vars_VP):
         self.name = name
-        temp = []
-        for var in vars:
-            temp.append(var)
-        self.vars = temp
-        self.vars_VT = self.vars[0]
-        self.vars_VP = self.vars[1]
+        self.vars_VT = vars_VT
+        self.vars_VP = vars_VP
 
     # Tổng số chất đang có bên vế trái
     def getNumVar(self):
@@ -54,17 +51,12 @@ class PROBLEM:
         self.unknownVar = var
 
     # Cài đặt hóa chất nào chưa biết
-    def setKnownVars(self, *vars):
-        self.knownVars = []
-        for var in vars:
-            self.knownVars.append(var)
+    def setKnownVars(self, vars):
+        self.knownVars = vars
 
     # Thêm tri thức (phương trình) vào bài toán
-    def addEquation(self, *equations):
-        self.equations = []
-        for equation in equations:
-            self.equations.append(equation)
-        # print(self.equations)
+    def addEquation(self, equations):
+        self.equations = equations
 
     # Số lượng hóa chất đã biết (chỉ tính bên vế trái phương trình)
     def getNumKnownVar(self, equation):
@@ -105,7 +97,7 @@ class PROBLEM:
         return False
 
     # Giải bài toán
-    def slove(self):
+    def solve(self):
         flag = True
         while (flag):
             flag = False
@@ -121,48 +113,44 @@ class PROBLEM:
                         solutions = temp
                         for step in self.steps:
                             solutions.append(step)
-                        return solutions
-        return ["bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức"]
+                        return [True, solutions]
+        return [False, "Bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức."]
 
 
-def process():
-    # define names
-    chemistry_1 = "Na"
-    chemistry_2 = "Cl_2"
-    chemistry_3 = "NaCl"
-    chemistry_4 = "Cu"
-    chemistry_5 = "CuCl_2"
-    chemistry_6 = "H_2O"
-    chemistry_7 = "HCl"
-    chemistry_8 = "HClO"
-    chemistry_9 = "MnO_2"
-    chemistry_10 = "MnCl_2"
-    chemistry_11 = "KMnO_4"
-    chemistry_12 = "KCl"
-    chemistry_13 = "H_2"
-    chemistry_14 = "NaOH"
-    chemistry_15 = "K"
-    chemistry_16 = "Fe"
-    chemistry_17 = "FeCl_3"
-    # define equation
-    Eq_1 = EQUATION("công thuc 1", [chemistry_1, chemistry_2], [chemistry_3])
-    Eq_2 = EQUATION("công thuc 2", [chemistry_16, chemistry_2], [chemistry_17])
-    Eq_3 = EQUATION("công thuc 3", [chemistry_4, chemistry_2], [chemistry_5])
-    Eq_4 = EQUATION("công thuc 4", [chemistry_2, chemistry_6], [chemistry_7, chemistry_8])
-    Eq_5 = EQUATION("công thuc 5", [chemistry_9, chemistry_7], [chemistry_10, chemistry_2, chemistry_6])
-    Eq_6 = EQUATION("công thuc 6", [chemistry_7, chemistry_11], [chemistry_12, chemistry_10, chemistry_6, chemistry_2])
-    Eq_7 = EQUATION("công thuc 7", [chemistry_3, chemistry_6], [chemistry_2, chemistry_13, chemistry_14])
-    Eq_8 = EQUATION("công thuc 8", [chemistry_15, chemistry_2], [chemistry_12])
+def get_data_from_file(file_path: str):
+    file = open(file_path, "r")
+    eq_list = []
+    for line in file.readlines():
+        temp = sub('\s+', '', line).split(sep="=")
+        vars_VT = [sub("(^\d+)", "", var) for var in temp[0].split(sep="+")]
+        vars_VP = [sub("(^\d+)", "", var) for var in temp[1].split(sep="+")]
+        eq_list.append([vars_VT, vars_VP])
+    file.close()
+    return eq_list
+
+
+def preprocess_input(text):
+    return sub('\s+', '', text).split(",")
+
+
+def process(given, unknown, data):
+    eq_list = []
+    for i, row in enumerate(data):
+        print(row)
+        eq = EQUATION("công thức " + str(i+1), row[0], row[1])
+        eq_list.append(eq)
 
     problem = PROBLEM()
 
-    problem.addEquation(Eq_1, Eq_2, Eq_3, Eq_4, Eq_5, Eq_6, Eq_7, Eq_8)
-    problem.setKnownVars(chemistry_1, chemistry_2, chemistry_6)
-    unKnownChemistry = [chemistry_14]
+    problem.addEquation(eq_list)
+
+    if "O_2" not in given:
+        given.append('O_2')
+    problem.setKnownVars(given)
+
     solutions = []
-    for chemistry in unKnownChemistry:
+    for chemistry in unknown:
         problem.setUnknownVar(chemistry)
-        solutions.append(problem.slove())
+        solutions.append(problem.solve())
 
     return solutions
-

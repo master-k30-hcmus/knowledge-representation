@@ -6,19 +6,19 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>872</width>
-    <height>646</height>
+    <width>881</width>
+    <height>652</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ChemistryLab-Nhom07</string>
+   <string>BDTT-ChemistryLab-Nhom07</string>
   </property>
   <property name="windowIcon">
    <iconset>
     <normaloff>icon/lab-color.png</normaloff>icon/lab-color.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="btnLab">
+   <widget class="QPushButton" name="btnProcessLab">
     <property name="geometry">
      <rect>
       <x>390</x>
@@ -47,10 +47,10 @@
    <widget class="QGroupBox" name="grpProduceSteps">
     <property name="geometry">
      <rect>
-      <x>530</x>
-      <y>210</y>
+      <x>540</x>
+      <y>220</y>
       <width>321</width>
-      <height>351</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="font">
@@ -70,7 +70,7 @@
        <x>10</x>
        <y>30</y>
        <width>301</width>
-       <height>311</height>
+       <height>341</height>
       </rect>
      </property>
      <property name="readOnly">
@@ -85,9 +85,9 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>210</y>
+      <y>220</y>
       <width>321</width>
-      <height>351</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="font">
@@ -99,12 +99,12 @@
     <property name="title">
      <string>Phương trình hóa học</string>
     </property>
-    <widget class="QToolButton" name="btnInputEquationsFromFile">
+    <widget class="QToolButton" name="btnBrowseFile">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>121</width>
+       <width>91</width>
        <height>31</height>
       </rect>
      </property>
@@ -125,7 +125,7 @@
      <property name="geometry">
       <rect>
        <x>240</x>
-       <y>310</y>
+       <y>340</y>
        <width>71</width>
        <height>31</height>
       </rect>
@@ -140,24 +140,92 @@
       <string>Xóa</string>
      </property>
     </widget>
-    <widget class="QTextEdit" name="inputEquations">
+    <widget class="QPlainTextEdit" name="txtEquationList">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>100</y>
+       <width>301</width>
+       <height>231</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+      </font>
+     </property>
+     <property name="placeholderText">
+      <string>Nhập các phương trình hóa học</string>
+     </property>
+    </widget>
+    <widget class="QLabel" name="txtFilename">
+     <property name="geometry">
+      <rect>
+       <x>110</x>
+       <y>30</y>
+       <width>201</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+    <widget class="QLabel" name="txtEquationListStatus">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>70</y>
        <width>301</width>
-       <height>231</height>
+       <height>20</height>
       </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Tahoma</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+     </property>
+    </widget>
+    <widget class="QLabel" name="label_2">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>340</y>
+       <width>211</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>8</pointsize>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="text">
+      <string>*Hai vế cách nhau bởi dấu bằng &quot;=&quot;</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="grpProblem">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>90</y>
+      <x>190</x>
+      <y>80</y>
       <width>501</width>
-      <height>91</height>
+      <height>111</height>
      </rect>
     </property>
     <property name="font">
@@ -169,7 +237,7 @@
     <property name="title">
      <string>Điều chế</string>
     </property>
-    <widget class="QLineEdit" name="inputSourceChemistry">
+    <widget class="QLineEdit" name="txtGivenChemistry">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -181,8 +249,11 @@
      <property name="text">
       <string/>
      </property>
+     <property name="placeholderText">
+      <string>Chất đã biết</string>
+     </property>
     </widget>
-    <widget class="QLineEdit" name="inputTargetChemistry">
+    <widget class="QLineEdit" name="txtUnknownChemistry">
      <property name="geometry">
       <rect>
        <x>280</x>
@@ -190,6 +261,9 @@
        <width>211</width>
        <height>51</height>
       </rect>
+     </property>
+     <property name="placeholderText">
+      <string>Chất cần điều chế</string>
      </property>
      <property name="clearButtonEnabled">
       <bool>false</bool>
@@ -224,6 +298,26 @@
       <bool>true</bool>
      </property>
     </widget>
+    <widget class="QLabel" name="label">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>90</y>
+       <width>211</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="font">
+      <font>
+       <family>Arial</family>
+       <pointsize>8</pointsize>
+       <italic>true</italic>
+      </font>
+     </property>
+     <property name="text">
+      <string>*Các hóa chất cách nhau bởi dấu phẩy &quot;,&quot;</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QLabel" name="txtTitle">
     <property name="geometry">
@@ -249,13 +343,13 @@
      <set>Qt::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QLabel" name="txtProcessing">
+   <widget class="QLabel" name="txtLabStatus">
     <property name="geometry">
      <rect>
-      <x>390</x>
-      <y>490</y>
-      <width>101</width>
-      <height>20</height>
+      <x>370</x>
+      <y>480</y>
+      <width>141</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="font">
@@ -265,48 +359,75 @@
      </font>
     </property>
     <property name="text">
-     <string>Processing</string>
+     <string/>
     </property>
     <property name="alignment">
      <set>Qt::AlignCenter</set>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <zorder>grpProblem</zorder>
    <zorder>grpEquations</zorder>
    <zorder>grpProduceSteps</zorder>
-   <zorder>btnLab</zorder>
+   <zorder>btnProcessLab</zorder>
    <zorder>txtTitle</zorder>
-   <zorder>txtProcessing</zorder>
+   <zorder>txtLabStatus</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>872</width>
+     <width>881</width>
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuAuthors">
-    <property name="title">
-     <string>Nhóm 07</string>
-    </property>
-   </widget>
-   <widget class="QMenu" name="menuRefresh">
-    <property name="title">
-     <string>Thí nghiệm mới</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuChemistryLab">
     <property name="title">
      <string>ChemistryLab</string>
     </property>
+    <addaction name="actionNew"/>
+    <addaction name="separator"/>
+    <addaction name="actionAuthorInfo"/>
+    <addaction name="actionLabInfo"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
    </widget>
-   <addaction name="menuRefresh"/>
-   <addaction name="menuAuthors"/>
    <addaction name="menuChemistryLab"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionNew">
+   <property name="text">
+    <string>Thí nghiệm mới</string>
+   </property>
+  </action>
+  <action name="actionLabInfo">
+   <property name="text">
+    <string>ChemistryLab</string>
+   </property>
+  </action>
+  <action name="actionTho_t">
+   <property name="text">
+    <string>Thoát</string>
+   </property>
+  </action>
+  <action name="actionTho_t_2">
+   <property name="text">
+    <string>Thoát</string>
+   </property>
+  </action>
+  <action name="actionAuthorInfo">
+   <property name="text">
+    <string>Nhóm 07</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Thoát</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

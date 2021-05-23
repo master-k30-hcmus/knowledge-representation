@@ -1,1 +1,14 @@
-hello world from equations version 1
+Na+Cl_2=NaCl
+Fe+3Cl2=FeCl_3
+Cu+Cl2 =CuCl2
+Cl2+H2O = HCl+HClO
+MnO2 +4HCl = MnCl2+ Cl2+2H2O
+HCl+ KMnO4 = KCl+ MnCl2+H2O+Cl2 
+NaCl+H2O = Cl2+ H2+ NaOH	
+K+Cl2 = 2KCl
+NaCl = Na + Cl_2
+Cl_2+H_2O = HCl+HClO
+S+O_2 = SO_2
+SO_2+O_2 = SO_3
+SO_3+H_2O = H_2SO_4
+H_2SO_4+2NaCl = 2HCl+Na_2SO_4
