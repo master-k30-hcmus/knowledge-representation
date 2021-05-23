@@ -3,8 +3,6 @@ exercise-2/chemistry-lab/.idea/
 exercise-2/chemistry-lab/app/__pycache__/
 exercise-2/chemistry-lab/app/ui/__pycache__/
 exercise-2/chemistry-lab/venv/
-exercise-2/chemistry-lab/tools/build/
-exercise-2/chemistry-lab/tools/dist/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
