@@ -1,4 +1,5 @@
 import sys
+from os import getcwd
 
 from PyQt5.uic import loadUi
 from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QFileDialog, qApp
@@ -10,8 +11,7 @@ from lab import preprocess_input, process, get_data_from_file
 class Window(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
-        loadUi('D:/master-k30-hcmus/knowledge-representation/exercise-2/chemistry-lab/app/ui/app.ui', self)
-
+        loadUi(f'{getcwd()}/app/ui/app.ui', self)
         self.file_path = ""
 
         # Equations input
