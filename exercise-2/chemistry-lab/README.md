@@ -17,5 +17,8 @@ A Chemistry Lab application using Semantic Network.
 > python app\main.py
 
 ## Build execute application from .py file
-Open command line and run:
-> cd tools && py2app.sh
+Open command line (CMD) and run:
+> cd tools
+> py2app.sh
+or `-d|--debug` for debug mode with console
+> py2app.sh -d
