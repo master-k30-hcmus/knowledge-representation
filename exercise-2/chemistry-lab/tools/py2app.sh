@@ -17,6 +17,11 @@ OUTPUT_DIR="../$APP_NAME"
 mkdir -p "$OUTPUT_DIR"
 echo "OUTPUT_DIR=" $OUTPUT_DIR
 
+DATA_DIR="app/ui"
+mkdir -p "$OUTPUT_DIR/$DATA_DIR"
+cp -r "../$DATA_DIR" "$OUTPUT_DIR/app"
+rm -r "$OUTPUT_DIR/$DATA_DIR/__pycache__"
+
 if "$DEBUG"; then
   pyinstaller ../app/$SRC_NAME.py --name $APP_NAME --clean --onefile --console --distpath $OUTPUT_DIR --workpath $OUTPUT_DIR --specpath $OUTPUT_DIR
 else
