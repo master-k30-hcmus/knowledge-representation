@@ -1,10 +1,7 @@
 import sys
-from time import sleep
 
 from PyQt5.uic import loadUi
-from PyQt5.QtWidgets import (
-    QApplication, QMessageBox, QMainWindow, QFileDialog, qApp
-)
+from PyQt5.QtWidgets import QApplication, QMessageBox, QMainWindow, QFileDialog, qApp
 from PyQt5.QtCore import QDir
 
 from lab import preprocess_input, process, get_data_from_file
@@ -13,11 +10,9 @@ from lab import preprocess_input, process, get_data_from_file
 class Window(QMainWindow):
     def __init__(self, parent=None):
         super().__init__(parent)
-        # self.setupUi(self)
         loadUi('D:/master-k30-hcmus/knowledge-representation/exercise-2/chemistry-lab/app/ui/app.ui', self)
 
         self.file_path = ""
-        # Chemistry input
 
         # Equations input
         self.btnBrowseFile.clicked.connect(self.get_file)
@@ -39,7 +34,7 @@ class Window(QMainWindow):
                                            "Đặng Khánh Thi - 20C29038")
 
     def info_lab(self):
-        QMessageBox.about(self, "Chemistry Lab", "Một chương trình demo các tri thức về điều chế chất hóa học trong "
+        QMessageBox.about(self, "Chemistry Lab", "Một chương trình demo các tri thức về điều chế các chất hóa học trong "
                                                  "môn học Biểu diễn Tri thức.")
 
     def get_file(self):
@@ -101,11 +96,11 @@ class Window(QMainWindow):
         given = preprocess_input(self.txtGivenChemistry.text())
         unknown = preprocess_input(self.txtUnknownChemistry.text())
 
-        data = get_data_from_file(self.file_path)
-
         if not self.valid_input():
             self.set_lab_status(text='Thiếu dữ liệu cần thiết', status='error')
             return
+
+        data = get_data_from_file(self.file_path)
 
         self.set_lab_status(text='Đang xử lý', status='processing')
         solutions = process(given, unknown, data)
@@ -113,7 +108,6 @@ class Window(QMainWindow):
         txt_shown = ""
         for i, solution in enumerate(solutions):
             txt_shown += f"Ta cần điều chế {unknown[i]}\n"
-            print(solution)
             if solution[0]:
                 for index, step in enumerate(solution[1]):
                     print(index, step)

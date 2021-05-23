@@ -7,7 +7,7 @@ Original file is located at
     https://colab.research.google.com/drive/1NnLk_isWSmoCcncWlkf3oKH4Lues-Gku
 """
 
-from re import sub, compile, IGNORECASE
+from re import sub
 
 
 class EQUATION:
@@ -21,7 +21,7 @@ class EQUATION:
         self.vars_VP = vars_VP
 
     # Tổng số chất đang có bên vế trái
-    def getNumVar(self):
+    def get_num_vars(self):
         return len(self.vars_VT)
 
 
@@ -47,51 +47,48 @@ class PROBLEM:
         self.unknownVar = -1
 
     # Cài đặt hóa chất nào đã biết
-    def setUnknownVar(self, var):
+    def set_unknown_var(self, var):
         self.unknownVar = var
 
     # Cài đặt hóa chất nào chưa biết
-    def setKnownVars(self, vars):
+    def set_known_vars(self, vars):
         self.knownVars = vars
 
     # Thêm tri thức (phương trình) vào bài toán
-    def addEquation(self, equations):
+    def set_equation_list(self, equations):
         self.equations = equations
 
     # Số lượng hóa chất đã biết (chỉ tính bên vế trái phương trình)
-    def getNumKnownVar(self, equation):
+    def get_num_known_vars(self, equation):
         count = 0
         for var in equation.vars_VT:
-            # print(var)
             if (var in self.knownVars):
                 count += 1
         return count
 
     # Trả về yếu tố chưa biết trong phương trình
-    def getUnknownVar(self, equation):
+    def get_unknown_vars(self, equation):
         for var in equation.vars_VP:
             if (var not in self.knownVars):
                 return var
 
     # Trả về các hóa chát có thể điều chế được, trả về kết quả điều chế
-    def getKnownVar(self, equation):
-        # print(self.getNumKnownVar(equation))
-        if ((self.getNumKnownVar(equation) == equation.getNumVar())):
+    def get_known_vars(self, equation):
+        if self.get_num_known_vars(equation) == equation.get_num_vars():
             return equation.vars_VP
         return -1
 
     # Kích hoạt hóa chất nào có thể điều chế
-    def activeVar(self, knownVar):
+    def active_var(self, knownVar):
         for var in knownVar:
             self.knownVars.append(var)
-        # print(self.knownVars)
 
     # Thêm bước giải
-    def addStep(self, var, equation):
+    def add_step(self, var, equation):
         self.steps.append((var, equation))
 
     # Kiểm tra điều chế thành công chưa?
-    def isSuccess(self):
+    def is_success(self):
         if (self.unknownVar in self.knownVars):
             return True
         return False
@@ -102,13 +99,12 @@ class PROBLEM:
         while (flag):
             flag = False
             for equation in self.equations:
-                knownVar = self.getKnownVar(equation)
-                # print(knownVar)
+                knownVar = self.get_known_vars(equation)
                 if (knownVar != -1):
-                    self.activeVar(knownVar)
-                    self.addStep(knownVar, equation)
+                    self.active_var(knownVar)
+                    self.add_step(knownVar, equation)
                     flag = True
-                    if (self.isSuccess()):
+                    if (self.is_success()):
                         temp = []
                         solutions = temp
                         for step in self.steps:
@@ -141,16 +137,15 @@ def process(given, unknown, data):
         eq_list.append(eq)
 
     problem = PROBLEM()
-
-    problem.addEquation(eq_list)
+    problem.set_equation_list(eq_list)
 
     if "O_2" not in given:
         given.append('O_2')
-    problem.setKnownVars(given)
+    problem.set_known_vars(given)
 
     solutions = []
     for chemistry in unknown:
-        problem.setUnknownVar(chemistry)
+        problem.set_unknown_var(chemistry)
         solutions.append(problem.solve())
 
     return solutions
