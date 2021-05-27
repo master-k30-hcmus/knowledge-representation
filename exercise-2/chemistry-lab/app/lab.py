@@ -95,23 +95,32 @@ class PROBLEM:
 
     # Giải bài toán
     def solve(self):
+        #Cờ đề truy vết
         flag = True
         while flag:
             flag = False
             print('self.equations', len(self.equations))
             print('self.steps', len(self.steps))
+            #Duyệt từng phương trình
             for equation in self.equations:
+                #Lấy chất điều chế bên VT phương trình
                 known_var = self.get_known_vars(equation)
+                #Nếu như 1 node (chất) có thể điều chế được (khác -1)
                 if known_var != -1:
+                    #Kích hoạt node có thể điều chế được
                     self.active_var(known_var)
+                    #Tiến thành lưu lại pt có thể điều chế
                     self.add_step(known_var, equation)
                     flag = True
+                    # Kiểm tra xem đã giải bài toán thành công chưa?
                     if self.is_success():
                         temp = []
                         solutions = temp
+                        # Trả về lời giải đến đích
                         for step in self.steps:
                             solutions.append(step)
                         return [True, solutions]
+        # Nếu không giải được trả về yêu cầu thêm thông tin, tri thức
         return [False, "Bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức."]
 
 
