@@ -1,8 +1,6 @@
-Na+Cl_2 = NaCl
-Fe + Cl_2 = FeCl_3
-Cu + Cl_2 = CuCl_2
-Cl_2 + H2O = HCl + HClO
-MnO_2 + 4HCl = MnCl_2 + Cl_2 + H_2O
-HCl + KMnO_4 = KCl + MnCl_2 + H_2O +Cl_2
-NaCl + H_2O = Cl_2 + H_2 + NaOH
-K + Cl_2 = KCl
+S + O_2 = SO_2
+SO_2 + O_2 = SO_3
+SO_3 + H_2O = H_2SO_4
+NaCl = Na + Cl2
+NaCl + H_2SO_4 = Na_2SO_4 + HCl
+Cl_2 + H_2O = HCl + HClO
