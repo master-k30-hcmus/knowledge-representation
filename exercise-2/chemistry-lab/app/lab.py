@@ -12,7 +12,6 @@ from typing import List
 
 
 class EQUATION:
-    vars = []
     vars_VP = []
     vars_VT = []
 
@@ -24,15 +23,6 @@ class EQUATION:
     # Tổng số chất đang có bên vế trái
     def get_num_vars(self):
         return len(self.vars_VT)
-
-
-class STEP:
-    var_value = -1
-    equation = -1
-
-    def __init__(self, var, equation):
-        self.var_value = var
-        self.equation = equation
 
 
 class PROBLEM:
