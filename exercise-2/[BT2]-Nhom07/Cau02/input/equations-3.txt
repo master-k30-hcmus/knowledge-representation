@@ -1,0 +1,6 @@
+S + O_2 = SO_2
+SO_2 + O_2 = SO_3
+SO_3 + H_2O = H_2SO_4
+NaCl = Na + Cl2
+NaCl + H_2SO_4 = Na_2SO_4 + HCl
+Cl_2 + H_2O = HCl + HClO
