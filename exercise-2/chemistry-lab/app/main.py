@@ -29,7 +29,7 @@ class Window(QMainWindow):
 
     def info_authors(self):
         QMessageBox.about(self, "Nhóm 07", "Phan Thị Thùy An - 20C29002\n"
-                                           "Định Thị Nữ - 20C29013\n"
+                                           "Đinh Thị Nữ - 20C29013\n"
                                            "Lý Phi Long - 20C29028\n"
                                            "Đặng Khánh Thi - 20C29038")
 
