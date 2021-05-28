@@ -35,7 +35,7 @@ class Window(QMainWindow):
 
     def info_lab(self):
         QMessageBox.about(self, "Chemistry Lab", "Một chương trình demo các tri thức về điều chế các chất hóa học trong "
-                                                 "môn học Biểu diễn Tri thức.")
+                                                 "môn học Biểu diễn Tri thức sử dụng mạng ngữ nghĩa.")
 
     def get_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, 'Single File', QDir.rootPath(), '*.txt')

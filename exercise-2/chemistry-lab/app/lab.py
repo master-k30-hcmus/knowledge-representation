@@ -110,8 +110,8 @@ class PROBLEM:
                         for step in self.steps:
                             solutions.append(step)
                         return [True, solutions]
-        # Nếu không giải được trả về yêu cầu thêm thông tin, tri thức
-        return [False, "Bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức."]
+            # Nếu không giải được trả về yêu cầu thêm thông tin, tri thức
+            return [False, "Bài toán không thể giải, hãy bổ sung thêm thông tin hoặc tri thức."]
 
 
 def clean_equation(line):
@@ -158,6 +158,8 @@ def process(given, unknown, data):
 
     if "O_2" not in given:
         given.append('O_2')
+    if "H_2O" not in given:
+        given.append('H_2O')
     problem.set_known_vars(given)
 
     print("Given chemistry:", given)
