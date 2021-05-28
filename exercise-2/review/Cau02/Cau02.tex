@@ -6,12 +6,12 @@
 \usepackage{scrextend}
 \usepackage{tcolorbox}
 \usepackage{setspace}
-
 \usepackage{times}
-
 \usepackage{listings}
 \usepackage{tvietlistings}
 \usepackage{xcolor}
+\usepackage{indentfirst}
+\setlength{\parindent}{0.5cm}
 
 %New colors defined below
 \definecolor{codegreen}{rgb}{0,0.6,0}
@@ -68,7 +68,7 @@
 	
 	\texttt{Na} + \texttt{H$_2$SO$_4$} = \texttt{Na$_2$SO$_4$} + \texttt{SO$_2$} + \texttt{H$_2$O}
 	
-	Miền tri thức về các phương trình phản ứng hóa học trên được lưu trữ trong tập tin dưới định dạng text (\textbf{\textit{.txt}}) được minh họa trong hình \ref{fig-2a:mien-tri-thuc}. 
+	Miền tri thức các phương trình phản ứng hóa học trên được lưu trữ trong tập tin dưới định dạng text (\textbf{\textit{.txt}}) được minh họa trong hình \ref{fig-2a:mien-tri-thuc}. 
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.7\linewidth]{images/2a_mien-tri-thuc}
@@ -77,7 +77,7 @@
 	\end{figure}
 	
 	Nhóm em sử dụng kiến thức về Lập trình hướng đối tượng để tổ chức lưu trữ và xử lý tự động các tri thức trên máy tính. Lớp đối tượng cơ bản \texttt{EQUATION} biểu diễn phương trình hóa học được định nghĩa như sau:
-	\begin{lstlisting}[language=Python, caption=Lớp đối tượng EQUATION]
+	\begin{lstlisting}[language=Python, caption=Lớp đối tượng \texttt{EQUATION}]
 		class EQUATION:
 			vars_VP = []
 			vars_VT = []
