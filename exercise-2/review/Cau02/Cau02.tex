@@ -62,6 +62,49 @@
 	
 	\section{Tổ chức lưu trữ cho miền tri thức} 	
 	
+	Tổ chức lưu trữ miền tri thức dưới dạng SQL với các bảng sau:
+	\begin{itemize}
+		\item Bảng \textbf{\texttt{Chemicals}}: mỗi dòng định danh từng chất hóa học ($Na$, $NaCl$, $H_2SO_4$, $\dots$) với \texttt{id} là dãy số duy nhất cho từng chất, \texttt{name} là tên khoa học của chất đó và \texttt{attribute} là tính chất của chất đó (bazo, axit, chất trơ,...)
+		
+		\begin{tabular}{|c|l|}
+			\hline
+			\multicolumn{2}{|c|}{\textbf{Chemicals}} \\
+			\hline
+			\textbf{PK} & \texttt{\textbf{id int NOT NULL}} \\
+			\hline
+			& \texttt{name char(50) NOT NULL} \\
+			\hline
+			& \texttt{attribute char(50) NOT NULL} \\
+			\hline
+		\end{tabular}
+	
+		\item Bảng \textbf{\texttt{Compounds}}: mỗi dòng chứa một dãy các chất hóa học ở vế trái hoặc vế phải từ miền tri thức, ví dụ \texttt{$S + O_2 = SO_2 => \text{ 2 dãy/dòng } [S,O_2], [O_2]$} với \texttt{id} là dãy số duy nhất cho từng dãy, \texttt{list\_chemicals} là dãy các chất và \texttt{type} là \texttt{'input'} nếu ở vế trái và \texttt{'output'} cho vế còn lại.
+		
+		\begin{tabular}{|c|l|}
+			\hline
+			\multicolumn{2}{|c|}{\textbf{Compounds}} \\
+			\hline
+			\textbf{PK} & \texttt{\textbf{id int NOT NULL}} \\
+			\hline
+			& \texttt{list\_chemicals char(200) NOT NULL} \\
+			\hline
+			& \texttt{type char(50) NOT NULL} \\
+			\hline
+		\end{tabular}
+	
+		\item Bảng \textbf{\texttt{Relations}}: mỗi dòng chứa một cặp \texttt{id} từ bảng \textbf{\texttt{Compounds}}, tương ứng một vế trái \texttt{'input\_id'} và một vế phải \texttt{'output\_id'}.
+		
+		\begin{tabular}{|c|l|}
+			\hline
+			\multicolumn{2}{|c|}{\textbf{Relations}} \\
+			\hline
+			FK1 & \texttt{input\_id int NOT NULL} \\
+			\hline
+			FK2 & \texttt{output\_id int NOT NULL} \\
+			\hline
+		\end{tabular}
+	\end{itemize}
+
 	Với phạm vi bài toán, miền tri thức thu thập sẽ nằm trong giới hạn đủ để giải quyết yêu cầu bài toán bao gồm một số những phương trinh hóa học cần thiết để điều chế \texttt{Na$_2$SO$_4$}, \texttt{H$_2$SO$_4$}, \texttt{HCl} và \texttt{Na} từ \texttt{S}, \texttt{H$_2$O},và \texttt{NaCl} như:
 	
 	\texttt{NaCl} = \texttt{Na} + \texttt{Cl$_2$}  
@@ -76,7 +119,7 @@
 		\label{fig-2a:mien-tri-thuc}
 	\end{figure}
 	
-	Nhóm em sử dụng kiến thức về Lập trình hướng đối tượng để tổ chức lưu trữ và xử lý tự động các tri thức trên máy tính. Lớp đối tượng cơ bản \texttt{EQUATION} biểu diễn phương trình hóa học được định nghĩa như sau:
+	Nhóm em sử dụng kiến thức về Lập trình hướng đối tượng để xử lý tự động các tri thức trên máy tính từ kho tri thức SQL. Lớp đối tượng cơ bản \texttt{EQUATION} biểu diễn phương trình hóa học được định nghĩa như sau:
 	\begin{lstlisting}[language=Python, caption=Lớp đối tượng \texttt{EQUATION}]
 		class EQUATION:
 			vars_VP = []
