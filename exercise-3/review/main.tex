@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{vietnam}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{scrextend}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\usepackage{times}
+\usepackage{listings}
+\usepackage{tvietlistings}
+\usepackage{xcolor}
+\usepackage{indentfirst}
+\setlength{\parindent}{0.5cm}
+
+%New colors defined below
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+%Code listing style named "mystyle"
+\lstdefinestyle{mystyle}{
+	backgroundcolor=\color{backcolour},   commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codegray},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=5pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=2
+}
+
+%"mystyle" code listing set
+\lstset{style=mystyle}
+
+\onehalfspacing
+\textwidth=16 cm
+\oddsidemargin=0 cm
+\evensidemargin=1 cm
+\topmargin= -1 cm
+
+\renewcommand\thesection{Câu \alph{section}.}
+\renewcommand\thesubsection{\roman{subsection}.}
+
+\title{BIỄU DIỄN TRI THỨC\\ Bài tập 3}
+\author{Nhóm 07}
+\date{June 19th, 2021}
+
+\begin{document}
+	\maketitle
+	\begin{center}
+		\LARGE{\textbf{Bài 3\\Thu thập tri thức}}
+		
+		\Large{\textbf{Lý thuyết đồ thị}}
+		
+		\Large{\textbf{Bài toán tìm đường đi ngắn nhất}}
+	\end{center}
+	
+	\include{section-a}
+	\include{section-b}
+	\include{section-c}	
+
+\end{document}
