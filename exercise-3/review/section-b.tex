@@ -1,1 +1,16 @@
 \section{Mô hình biểu diễn tri thức} 
+
+Gọi \texttt{path} là bộ các (\texttt{from\_node}, \texttt{to\_node}, \texttt{distance})
+
+Facts
+\begin{itemize}
+	\item \texttt{start\_node}
+	\item \texttt{end\_node}
+	\item \texttt{path\_1}, \texttt{path\_2}, \texttt{path\_3}, ...\texttt{path\_n}
+\end{itemize}
+
+Rules
+\begin{itemize}
+	\item $\forall \texttt{i} \in \{\texttt{1,n}\}, \texttt{adjacency\_list}[\texttt{from\_node\_i}]=\{ \texttt{to\_node\_j} | \forall \texttt{j} \in \{\texttt{1,n}\}\} \Rightarrow \texttt{adjacency\_list}$
+	\item $\exists! \texttt{i} \in \texttt{n}, \min(\texttt{path\_i[distance]}) \Rightarrow \texttt{min\_path}$
+\end{itemize}
