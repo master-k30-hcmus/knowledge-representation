@@ -2,6 +2,8 @@
 
 `git clone https://github.com/master-k30-hcmus/knowledge-representation.git`
 
+Drive: (knowledge-representation)[https://drive.google.com/drive/u/0/folders/1xW6xLNPXAbBi5E1FvSzxHonxpXv0LsHV]
+
 # Google Classroom
 Code: h2sesjm
 
