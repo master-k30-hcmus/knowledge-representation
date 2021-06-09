@@ -123,6 +123,13 @@ def main():
         distance=11,
     )
 
+    try_algorithm(
+        filename="simple_graph.txt",
+        start="A",
+        end="F",
+    )
+
+
 def verify_algorithm(filename, start, end, path, distance):
     """Helper function to run simple tests and print results to console.
 
@@ -143,6 +150,18 @@ def verify_algorithm(filename, start, end, path, distance):
     print('      start/end nodes: {0} -> {1}'.format(start, end))
     print('        shortest path: {0}'.format(path))
     print('       total distance: {0}'.format(distance))
+
+
+def try_algorithm(filename, start, end):
+    graph = Graph(filename)
+    returned_path, returned_distance = graph.shortest_path(start, end)
+    print("returned_path", returned_path)
+    print("returned_distance", returned_distance)
+
+    print('\ngraph definition file: {0}'.format(filename))
+    print('      start/end nodes: {0} -> {1}'.format(start, end))
+    print('        shortest path: {0}'.format(returned_path))
+    print('       total distance: {0}'.format(returned_distance))
 
 
 if __name__ == "__main__":
