@@ -3,7 +3,7 @@
 \begin{itemize}
 	\item Xác định bài toán
 	
-	Cho đồ thị vô hướng $G$ không có trọng lượng âm, định xuất phát $x_0$. Tìm đường đi ngắn nhất từ $x_0$ đến đỉnh bất kỳ $x_k$ theo thuật toán Dijsktra
+	Cho đồ thị vô hướng $G$ không có trọng lượng âm, định xuất phát $x_0$. Tìm đường đi ngắn nhất từ $x_0$ đến đỉnh bất kỳ $x_k$.
 	
 	\item Nguồn thu thập tri thức
 	\begin{itemize}
@@ -14,7 +14,84 @@
 	\begin{itemize}
 		\item \textbf{Khái niệm: } Node, Edge
 		\item \textbf{Quan hệ: } Khoảng cách giữa 2 Node liền kề
-		\item \textbf{Hàm: } Dijsktra(Node, Node); Degree(Node)
+		\item \textbf{Hàm: } Dijsktra(Node, Node); AStar(Node, Node); Degree(Node)
+	\end{itemize}
+	\item Trình bày thuật giải
+	\begin{itemize}
+		\item Thuật toán Dijkstra
+		
+		\textbf{Mô tả bài toán:} Cho một đồ thị có hướng $G=(V,E)$, một hàm trọng số $w: E \rightarrow [0,\infty]$ và một đỉnh nguồn s. Cần tính toán được đường đi ngắn nhất từ đỉnh nguồn s đến mỗi đỉnh của đồ thị.
+		
+		\textbf{Ứng dụng thực tế:}
+		\begin{itemize}
+			\item Được sử dụng để tìm con đường đi ngắn nhất.
+			\item Được sử dụng trong các ứng dụng mạng xã hội.
+			\item Được ứng dụng trong mạng điện thoại.
+			\item Được ứng dụng để tìm các vị trí trong bản đồ.
+		\end{itemize}
+	
+	
+		\textbf{Thuật toán:}
+		\begin{lstlisting}[language=Python, caption=Mã giải của thuật toán Dijkstra]
+			def dijkstra(self, src):
+			
+				dist = [sys.maxsize] * self.V
+				dist[src] = 0
+				sptSet = [False] * self.V
+			
+				for cout in range(self.V):
+			
+					# Pick the minimum distance vertex from
+					# the set of vertices not yet processed.
+					# u is always equal to src in first iteration
+					u = self.minDistance(dist, sptSet)
+			
+					# Put the minimum distance vertex in the
+					# shotest path tree
+					sptSet[u] = True
+			
+					# Update dist value of the adjacent vertices
+					# of the picked vertex only if the current
+					# distance is greater than new distance and
+					# the vertex in not in the shotest path tree
+					for v in range(self.V):
+						if self.graph[u][v] > 0 and
+							sptSet[v] == False and
+							dist[v] > dist[u] + self.graph[u][v]:
+								dist[v] = dist[u] + self.graph[u][v]
+			
+				self.printSolution(dist)
+		\end{lstlisting}
+		\item Thuật toán A*
+		
+		\textbf{Mô tả bài toán:} Cho một đồ thị có hướng $G=(V,E)$, một hàm trọng số $w: E \rightarrow [0,\infty]$ và một đỉnh nguồn s. Cần tính toán được đường đi ngắn nhất từ đỉnh nguồn s đến mỗi đỉnh của đồ thị tuy nhiên dựa vào heuristics để tăng tốc độ tìm kiếm.
+		
+		\textbf{Ứng dụng của thuật tóan:}
+		\begin{itemize}
+			\item Được sử dụng để tìm con đường đi ngắn nhất.
+			\item Được sử dụng trong các ứng dụng mạng xã hội.
+			\item Được ứng dụng trong mạng điện thoại.
+			\item Được ứng dụng để tìm các vị trí trong bản đồ.
+		\end{itemize}
+		
+		\textbf{Thuật toán:}
+		\begin{lstlisting}[language=Matlab, caption= Mã giải của thuật toán A*]
+			function A*(điểm_xuất_phát,đích)
+				var đóng:= tập rỗng
+				var q:= tạo_hàng_đợi(tạo_đường_đi(điểm_xuất_phát))
+				while q không phải tập rỗng
+					var p:= lấy_phần_tử_đầu_tiên(q)
+					var x:= nút cuối cùng của p
+					if x in đóng
+						continue
+					if x = đích
+						return p
+					bổ sung x vào tập đóng
+					foreach y in các_đường_đi_tiếp_theo(p)
+						đưa_vào_hàng_đợi(q, y)
+				return failure
+		\end{lstlisting}
+		
 	\end{itemize}
 \end{itemize}
 
