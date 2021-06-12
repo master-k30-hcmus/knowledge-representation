@@ -1,50 +1,34 @@
 \section{Tổ chức lưu trữ miền tri thức} 
 
-Tổ chức lưu trữ miền tri thức trong hệ quản trị cơ sở dữ liệu \texttt{(CSDL) MS SQL Server} với các bảng sau:
+Tổ chức lưu trữ miền tri thức trong hệ quản trị cơ sở dữ liệu \texttt{(CSDL) MS SQL Server} với cấu trúc bảng như sau:
 
 \begin{itemize}
-	\item Bảng \textbf{\texttt{Vertices}}: mỗi dòng định danh đỉnh của đồ thị ($a$, $b$, $c$, $\dots$) với:
+	\item Bảng \textbf{\textbf{KNOWLEDGE\_REPRESENTATION}}: mỗi dòng định danh một yếu tố tri thức trong miền tri thức lý thuyết đồ thị. 
 	\begin{itemize}
-		\item \texttt{id} là dãy số duy nhất cho từng đỉnh, \texttt{name} là tên đỉnh thường được đặt theo ký hiệu toán học.
-		\item \texttt{degree} là thuộc tính bậc của đỉnh (${deg_a}$ = 2, ${deg_b}$ = 1 , $\dots$), trong đó một số trường hợp đặc biệt số bậc của đỉnh như ${deg_b}$ = 1, cho biết $b$ là đỉnh treo hay nếu ${deg_b}$ = 0 thì  $b$ là đỉnh cô lập.
+		\item \texttt{id} là dãy số duy nhất tương ứng với một yếu tố tri thức 
+		\item \texttt{name} tên yếu tố tri thức
+		\item \texttt{content} nội dung yếu tố tri thức được trình bày
+		\item \texttt{keypharse} cụm từ khóa được sử dụng để tìm kiếm yếu tố tri thức, thường là tên và thành phần của yếu tố tri thức.
+		\item \texttt{related\_keypharse} cụm từ khóa của những yếu tố tri thức có liên quan tới yếu tố tri thức đang được xét.
 	\end{itemize} 
 	
 	\begin{tabular}{|c|l|}
 		\hline
-		\multicolumn{2}{|c|}{\textbf{Vertices}} \\
+		\multicolumn{2}{|c|}{\textbf{KNOWLEDGE\_REPRESENTATION}} \\
 		\hline
 		\textbf{PK} & \texttt{\textbf{id int NOT NULL}} \\
 		\hline
 		& \texttt{name char(50) NOT NULL} \\
 		\hline
-		& \texttt{degree int NOT NULL} \\
+		& \texttt{content char(1000) NOT NULL} \\
+		\hline
+		& \texttt{keypharse char(250) NOT NULL} \\
+		\hline
+		& \texttt{related\_keypharse char(250) NOT NULL} \\
 		\hline
 	\end{tabular}
 	
-	\item Bảng \textbf{\texttt{Edges}}: mỗi dòng chứa thông tin của một cạnh trong đồ thị bao gồm hai cặp \texttt{id} của đỉnh từ \\bảng \texttt{vertices}, khoảng cách (\texttt{distance}) giữa hai đỉnh đó và tên (\texttt{name}) của cạnh đó.
-	
-	\begin{tabular}{|c|l|}
-		\hline
-		\multicolumn{2}{|c|}{\textbf{Edges}} \\
-		\hline
-		\textbf{FK} & \texttt{\textbf{from\_id char(50) NOT NULL}} \\
-		\hline
-		\textbf{FK} & \texttt{\textbf{to\_id char(50) NOT NULL}} \\
-		\hline
-		& \texttt{distance int NOT NULL} \\
-		\hline
-		& \texttt{name char(100) NOT NULL} \\
-		\hline
-	\end{tabular}
 \end{itemize}
-	
-Miền tri thức trên cho phép giải các bài toán liên quan tới phân loại đồ thị, tìm đường đi và chu trình đường đi trong đồ thị.
 
-Ví dụ minh họa chi tiết miền tri thức lý thuyết đồ thị bằng cấu trúc bảng dữ liệu với đồ thị gồm 5 đỉnh A,B,C,D,E với độ dài các cạnh tương ứng như bên dưới:
+Miền tri thức trên cho phép giải các bài toán liên quan tới tìm kiếm tri thức và tri thức liên quan tới lý thuyết đồ thị.
 
-\begin{figure}[h]
-	\centering
-	\includegraphics[width= 0.9\linewidth]{tables.PNG}
-	\caption{Minh họa miền tri thức định dạng bảng trong CSDL}
-	\label{fig-3: dinh dang mien-tri-thuc}
-\end{figure}
