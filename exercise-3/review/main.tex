@@ -52,7 +52,7 @@
 
 \title{BIỄU DIỄN TRI THỨC\\ Bài tập 3}
 \author{Nhóm 07}
-\date{June 19th, 2021}
+\date{June 12th, 2021}
 
 \begin{document}
 	\maketitle
@@ -64,8 +64,56 @@
 		\Large{\textbf{Bài toán tìm đường đi ngắn nhất}}
 	\end{center}
 	
-	\include{section-a}
-	\include{section-b}
-	\include{section-c}	
+	\section{Xác định nguồn tri thức} 
+	
+	Bảng tri thức thu thập được trình bày trong tập tin \textit{BT3-Nhom07-CauA.pdf}.
+	
+	\section{Mô hình biểu diễn tri thức} 
+	Mô hình $(C, R)$:
+	
+	\begin{itemize}
+		\item $C$ =  tập các yếu tố tri thức ở câu a,
+		với $c \in C: (\text{yếu tố tri thức, nội dung})$
+		
+		\item $R$ = Tập hợp mối quan hệ giữa các $c \in C$ với nhau, 
+		với $R$ = {"is-a", "has-a"}
+	\end{itemize}
+	
+	\section{Tổ chức lưu trữ miền tri thức} 
+	
+	Tổ chức lưu trữ miền tri thức trong hệ quản trị cơ sở dữ liệu \texttt{(CSDL) MS SQL Server} với cấu trúc bảng như sau:
+	
+	\begin{itemize}
+		\item Bảng \textbf{\textbf{KNOWLEDGE\_REPRESENTATION}}: mỗi dòng định danh một yếu tố tri thức trong miền tri thức lý thuyết đồ thị.
+		
+		\begin{itemize}
+			\item \texttt{id} là dãy số duy nhất tương ứng với một yếu tố tri thức 
+			\item \texttt{name} tên yếu tố tri thức
+			\item \texttt{content} nội dung yếu tố tri thức được trình bày
+			\item \texttt{keypharse} cụm từ khóa được sử dụng để tìm kiếm yếu tố tri thức, thường là tên và thành phần của yếu tố tri thức.
+			\item \texttt{related\_keypharse} cụm từ khóa của những yếu tố tri thức có liên quan tới yếu tố tri thức đang được xét.
+		\end{itemize} 
+		
+		\begin{tabular}{|c|l|}
+			\hline
+			\multicolumn{2}{|c|}{\textbf{KNOWLEDGE\_REPRESENTATION}} \\
+			\hline
+			\textbf{PK} & \texttt{\textbf{id int NOT NULL}} \\
+			\hline
+			& \texttt{name char(50) NOT NULL} \\
+			\hline
+			& \texttt{content char(1000) NOT NULL} \\
+			\hline
+			& \texttt{keypharse char(250) NOT NULL} \\
+			\hline
+			& \texttt{related\_keypharse char(250) NOT NULL} \\
+			\hline
+		\end{tabular}
+		
+	\end{itemize}
+	
+	Miền tri thức trên cho phép giải các bài toán liên quan tới tìm kiếm tri thức và tri thức liên quan tới lý thuyết đồ thị.
+	
+	
 
 \end{document}
