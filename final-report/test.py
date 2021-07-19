@@ -34,8 +34,12 @@ class TestToHopTuyenTinh(unittest.TestCase):
 
     def test_phu_thuoc_tuyen_tinh(self):
         giai.nhap_du_lieu(kiem_tra_dltt["b"])
-        result = giai.kiem_tra_thtt()
-        self.assertEqual(result[0], False, "Should be False")
+        result_1 = giai.kiem_tra_thtt()
+        self.assertEqual(result_1[0], False, "Should be False")
+
+        giai.nhap_du_lieu(kiem_tra_dltt["c"])
+        result_2 = giai.kiem_tra_thtt()
+        self.assertEqual(result_2[0], False, "Should be False")
 
 
 class TestKhongGianVector(unittest.TestCase):
