@@ -9,7 +9,7 @@ pip install -r requirement.txt
 ## Chạy chương trình
 
 ```shell
-python main.py {{đề_bài}}
+python main.py "đề bài"
 ```
 
 ## Chạy Unit tests
