@@ -1,8 +1,13 @@
 *.spec
+
 exercise-2/chemistry-lab/.idea/
 exercise-2/chemistry-lab/app/__pycache__/
 exercise-2/chemistry-lab/app/ui/__pycache__/
 exercise-2/chemistry-lab/venv/
+
+final-report/.idea/
+final-report/__pycache__/
+final-report/venv/
 
 ## Core latex/pdflatex auxiliary files:
 *.aux
