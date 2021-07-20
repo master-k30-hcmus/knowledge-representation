@@ -1,20 +1,27 @@
 # Hệ thống giải bài tập vector
 
-## Cài đặt môi trường
+## Environment
 
 ```shell
 pip install -r requirement.txt
 ```
 
-## Chạy chương trình
+## Run program
 
 ```shell
 python main.py "đề bài"
 ```
 
-## Chạy Unit tests
+## Run Unit tests
+
+Run all test:
 
 ```shell
 python test.py
 ```
 
+Run on module:
+
+```shell
+python test.py TestKhongGianVector
+```

@@ -46,22 +46,21 @@ class TestKhongGianVector(unittest.TestCase):
     def test_valid(self):
         bai_toan.nhap_du_lieu(kiem_tra_co_so["c"])
         result = bai_toan.kiem_tra_co_so()
-        self.assertEqual(result[0], True,
-                         "Should be True as detA=3 => B3 độc lập tuyến tính và dimB3=3 = dimR^3=3")
+        self.assertEqual(result, True, "Should be True")
 
     def test_khac_so_chieu(self):
         bai_toan.nhap_du_lieu(kiem_tra_co_so["a"])
         result_1 = bai_toan.kiem_tra_co_so()
-        self.assertEqual(result_1[0], False, "Should be False as dimB1=2 != dimR^3=3")
+        self.assertEqual(result_1, False, "Should be False")
 
         bai_toan.nhap_du_lieu(kiem_tra_co_so["b"])
         result_2 = bai_toan.kiem_tra_co_so()
-        self.assertEqual(result_2[0], False, "Should be False as dimB2=4 != dimR^3=3")
+        self.assertEqual(result_2, False, "Should be False")
 
     def test_khong_phai_thtt(self):
         bai_toan.nhap_du_lieu(kiem_tra_co_so["d"])
         result = bai_toan.kiem_tra_co_so()
-        self.assertEqual(result[0], False, "Should be False as detA=0 => B4 không độc lập tuyến tính")
+        self.assertEqual(result, False, "Should be False")
 
     def test_tim_theo_chieu(self):
         bai_toan.nhap_du_lieu(tim_co_so["a"])
