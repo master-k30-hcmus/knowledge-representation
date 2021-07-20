@@ -21,16 +21,16 @@ if __name__ == '__main__':
     )
     args = parser.parse_args()
 
-    bai_toan = args.de_bai
-    print("Đề bài:", bai_toan)
+    de_bai = args.de_bai
+    print("Đề bài:", de_bai)
 
     print("\nPhân tích bài toán:")
-    [dang, du_lieu] = phan_tich(bai_toan)
+    [dang, du_lieu] = phan_tich(de_bai)
     print("- Dạng bài:", dang)
     print("- Dữ liệu:", du_lieu)
 
     print("\nLời giải:")
-    giai = solver.Giai()
-    giai.nhap_du_lieu(du_lieu)
-    giai.bai_toan(dang)
-    giai.xuat_ket_qua()
+    bai_toan = solver.BaiToan()
+    bai_toan.nhap_du_lieu(du_lieu)
+    bai_toan.giai(dang)
+    bai_toan.xuat_ket_qua()

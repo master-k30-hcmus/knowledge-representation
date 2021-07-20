@@ -1,11 +1,11 @@
-class Giai(object):
+class BaiToan(object):
     du_lieu = None
     __loi_giai = []
 
     def nhap_du_lieu(self, du_lieu):
         self.du_lieu = du_lieu
 
-    def bai_toan(self, dang_bai_toan):
+    def giai(self, dang_bai_toan):
         phuong_phap = getattr(self, dang_bai_toan, lambda: None)
         if not phuong_phap():
             self.__loi_giai.append("Không xác định được bài toán.")
