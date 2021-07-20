@@ -1,5 +1,6 @@
 import argparse
 import solver
+import data
 
 
 def usage():
@@ -8,9 +9,9 @@ def usage():
     """
 
 
-def phan_tich(bai_toan):
-    dang = "dang"
-    du_lieu = ["du_lieu"]
+def phan_tich(de_bai):
+    dang = "kiem_tra_co_so"
+    du_lieu = data.kiem_tra_co_so["a"]["given"]
     return [dang, du_lieu]
 
 
@@ -26,11 +27,10 @@ if __name__ == '__main__':
 
     print("\nPhân tích bài toán:")
     [dang, du_lieu] = phan_tich(de_bai)
-    print("- Dạng bài:", dang)
+    print("- Dạng bài toán:", dang)
     print("- Dữ liệu:", du_lieu)
 
     print("\nLời giải:")
-    bai_toan = solver.BaiToan()
-    bai_toan.nhap_du_lieu(du_lieu)
-    bai_toan.giai(dang)
+    bai_toan = solver.BaiToan(dang, du_lieu)
+    bai_toan.giai()
     bai_toan.xuat_ket_qua()
