@@ -21,8 +21,8 @@ class BaiToan(object):
         self.du_lieu = du_lieu
 
     def phan_tich(self, de_bai):
-        dang = "kiem_tra_dltt"
-        du_lieu = data.kiem_tra_dltt["c"]
+        dang = "tim_co_so"
+        du_lieu = data.tim_co_so["a"]
         return [dang, du_lieu]
 
     def giai(self):
@@ -43,8 +43,6 @@ class BaiToan(object):
             if not self.__error:
                 self.kiem_tra_co_so()
         elif self.dang_bai_toan == constants.TIM_CO_SO:
-            self.__kiem_tra_du_lieu__(["given"])
-            if not self.__error:
                 self.tim_co_so()
         else:
             self.__buoc_giai__("Không xác định được dạng bài toán.")
@@ -66,17 +64,19 @@ class BaiToan(object):
 
     def kiem_tra_thtt(self):
         ket_qua = True
+
         given = np.array(self.du_lieu["given"])
         target = np.array([self.du_lieu["target"]])
+        he_so_tu_do = len(given)
 
         self.__buoc_giai__(f'\nBước 1: Ma trận hóa')
         matrix = np.append(given, target, axis=0)
         matrix_eq = Matrix(matrix.T)
-        self.__buoc_giai__(self.print_ma_tran(matrix_eq.tolist(), prefix='\t', split_at=len(given)))
+        self.__buoc_giai__(self.print_ma_tran(matrix_eq.tolist(), prefix='\t', split_at=he_so_tu_do))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang sử dụng biến đổi sơ cấp trên dòng')
         echelon_matrix = self.ma_tran_bac_thang(matrix_eq)
-        self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t', split_at=len(given)))
+        self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t', split_at=he_so_tu_do))
 
         for row in range(echelon_matrix.shape[0]):
             sum_row = sum(np.array(echelon_matrix[row, :given.shape[0]]).squeeze())
@@ -93,11 +93,11 @@ class BaiToan(object):
 
         self.__buoc_giai__(f'\nBước 1: Ma trận hóa')
         matrix = Matrix(given)
-        self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t', split_at=len(given)))
+        self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
         echelon_matrix = self.ma_tran_bac_thang(matrix)
-        self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t', split_at=len(given)))
+        self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t'))
 
         self.__buoc_giai__(f'\nBước 3: Xác định hạng của ma trận')
         rank = self.tinh_hang(echelon_matrix)
@@ -113,22 +113,21 @@ class BaiToan(object):
         ket_qua = False
 
         ten_tap_hop = self.du_lieu["name"] if "name" in self.du_lieu else "tập hợp vector đã cho"
-        matranA = self.du_lieu["given"]
+        given = np.array(self.du_lieu["given"])
         dimR = self.du_lieu["dimR"]
 
-        self.__buoc_giai__(f'\nBước 1: Lập ma trận từ {ten_tap_hop}')
-        self.__buoc_giai__(f'\tĐặt ma trận A = {matranA}')
+        self.__buoc_giai__(f'\nBước 1: Lập ma trận A từ {ten_tap_hop}')
+        matrix = Matrix(given)
+        self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
         self.__buoc_giai__(
-            f'\tTa có dimA = {len(matranA)}{f" không bằng dimR = {dimR}" if len(matranA) != dimR else ""}')
+            f'\tTa có dimA = {len(given)}{f" không bằng dimR = {dimR}" if len(given) != dimR else ""}')
 
-        if len(matranA) == dimR:
+        if len(given) == dimR:
             self.__buoc_giai__(f'\nBước 2: Tiến hành kiểm tra tính độc lập tuyến tính của {ten_tap_hop}')
-
-            detA = self.tinh_det(matranA)
+            detA = self.tinh_det(given)
             self.__buoc_giai__(f'\tTính được detA = {detA}{"" if detA == 0.0 else " != 0"}')
 
-            # dltt = self.kiem_tra_dltt()
-            dltt = True if detA != 0 else False
+            dltt = self.kiem_tra_dltt()
             self.__buoc_giai__(f'\tSuy ra {ten_tap_hop}{"" if dltt else " không"} độc lập tuyến tính')
             if dltt:
                 ket_qua = True
@@ -137,18 +136,23 @@ class BaiToan(object):
         return ket_qua
 
     def tim_co_so(self):
-        # ten_tap_hop = self.du_lieu["name"] if "name" in self.du_lieu else "tập hợp vector đã cho"
-        # matranA = self.du_lieu["given"]
-        # dimR = self.du_lieu["dimR"]
-        #
-        # self.__buoc_giai__(f'\nBước 1: Lập ma trận từ {ten_tap_hop}')
-        # self.__buoc_giai__(f'\tĐặt ma trận A = {matranA}')
-        # self.__buoc_giai__(
-        #     f'\tTa có dimA = {len(matranA)}{f" không bằng dimR = {dimR}" if len(matranA) != dimR else ""}')
-        #
-        # self.__buoc_giai__(f'\nKết luận: {ten_tap_hop}{"" if ket_qua else " không"} là cơ sở của R{dimR}')
+        given = np.array(self.du_lieu["given"])
 
-        return [False, ""]
+        self.__buoc_giai__(f'\nBước 1: Lập ma trận A')
+        matrix = Matrix(given)
+        self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
+
+        self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
+        echelon_matrix = self.ma_tran_bac_thang(matrix)
+        self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t'))
+
+        tap_co_so = []
+        for row in range(echelon_matrix.shape[0]):
+            sum_row = sum(np.array(echelon_matrix[row, :]).squeeze())
+            if sum_row != 0:
+                tap_co_so.append(echelon_matrix[row, :].tolist()[0])
+        self.__buoc_giai__(f'\nKết luận: {tap_co_so} là một cơ sở của W')
+        return tap_co_so
 
     @staticmethod
     def tinh_det(matrix):
@@ -196,7 +200,7 @@ class BaiToan(object):
                     lv = matrix[i, lead]
                     matrix[i, :] = matrix[i, :] - lv * matrix[r, :]
             lead += 1
-            self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t', split_at=3))
+            self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
         return matrix
 
     def __kiem_tra_du_lieu__(self, req_fields):
@@ -213,6 +217,6 @@ class BaiToan(object):
         for row in matrix:
             matrix_str += f'\n{prefix}'
             matrix_str += '\t'.join([str(cell) for cell in row[:split_at]])
-            if row[split_at:]:
+            if split_at and row[split_at:]:
                 matrix_str += f'\t|\t{str(row[split_at:][0])}'
         return matrix_str
