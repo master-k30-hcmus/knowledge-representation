@@ -13,7 +13,6 @@ class BaiToan(object):
             self.dang_bai_toan = dang
             self.du_lieu = du_lieu
 
-
     def nhap_du_lieu(self, du_lieu):
         self.du_lieu = du_lieu
 
