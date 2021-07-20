@@ -1,6 +1,7 @@
 import argparse
 import solver
 import data
+import constants
 
 
 def usage():
@@ -18,7 +19,7 @@ def phan_tich(de_bai):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Hệ thống giải bài tập vector", usage=usage())
     parser.add_argument(
-        "de_bai", help="nhập đề bài cần giải trong dấu \" \" "
+        "de_bai", help="nhập đề bài cần giải trong dấu \"\" "
     )
     args = parser.parse_args()
 
@@ -27,7 +28,7 @@ if __name__ == '__main__':
 
     print("\nPhân tích bài toán:")
     [dang, du_lieu] = phan_tich(de_bai)
-    print("- Dạng bài toán:", dang)
+    print("- Dạng bài toán:", constants.DANG_BAI_TOAN[dang])
     print("- Dữ liệu:", du_lieu)
 
     print("\nLời giải:")
