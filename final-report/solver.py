@@ -1,19 +1,33 @@
 import numpy as np
 import constants
+import data
 
 
 class BaiToan(object):
+    du_lieu = None
     __loi_giai = []
 
-    def __init__(self, dang_bai_toan, du_lieu):
-        if not du_lieu:
+    def __init__(self, de_bai=None):
+        if de_bai:
+            [dang, du_lieu] = self.phan_tich(de_bai)
+            self.dang_bai_toan = dang
+            self.du_lieu = du_lieu
+
+
+    def nhap_du_lieu(self, du_lieu):
+        self.du_lieu = du_lieu
+
+    def phan_tich(self, de_bai):
+        dang = "kiem_tra_co_so"
+        # dang = "a"
+        du_lieu = data.kiem_tra_co_so["a"]["given"]
+        return [dang, du_lieu]
+
+    def giai(self):
+        if not self.du_lieu:
             print("Thiếu dữ liệu")
             return
 
-        self.du_lieu = du_lieu
-        self.dang_bai_toan = dang_bai_toan
-
-    def giai(self):
         if self.dang_bai_toan == constants.KIEM_TRA_THTT:
             self.kiem_tra_thtt()
         elif self.dang_bai_toan == constants.KIEM_TRA_DLTT:
@@ -24,11 +38,16 @@ class BaiToan(object):
             self.tim_co_so()
         else:
             self.__buoc_giai__("Không xác định được dạng bài toán.")
+            return
+
+        print("\nPhân tích bài toán:")
+        print("- Dạng bài toán:", constants.DANG_BAI_TOAN[self.dang_bai_toan])
+        print("- Dữ liệu:", self.du_lieu)
 
     def xuat_ket_qua(self):
+        print("\nLời giải:")
         for step in self.__loi_giai:
             print(step)
-        return
 
     def kiem_tra_thtt(self):
         return [False, ""]
