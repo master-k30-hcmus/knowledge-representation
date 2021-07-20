@@ -33,7 +33,7 @@ class BaiToan(object):
         elif self.dang_bai_toan == constants.KIEM_TRA_DLTT:
             self.kiem_tra_dltt()
         elif self.dang_bai_toan == constants.KIEM_TRA_CO_SO:
-            self.__kiem_tra_du_lieu__(["name", "given", "dimR"])
+            self.__kiem_tra_du_lieu__(["given", "dimR"])
             if not self.__error:
                 self.kiem_tra_co_so()
         elif self.dang_bai_toan == constants.TIM_CO_SO:
@@ -65,17 +65,17 @@ class BaiToan(object):
     def kiem_tra_co_so(self):
         ket_qua = False
 
-        ten_tap_hop = self.du_lieu["name"]
+        ten_tap_hop = self.du_lieu["name"] if "name" in self.du_lieu else "tập hợp vector đã cho"
         matranA = self.du_lieu["given"]
         dimR = self.du_lieu["dimR"]
 
-        self.__buoc_giai__(f'\nBước 1: Xây dựng ma trận từ tập hợp vector {ten_tap_hop}')
+        self.__buoc_giai__(f'\nBước 1: Xây dựng ma trận từ {ten_tap_hop}')
         self.__buoc_giai__(f'\tĐặt ma trận A = {matranA}')
         self.__buoc_giai__(
             f'\tTa có dimA = {len(matranA)}{f" không bằng dimR = {dimR}" if len(matranA) != dimR else ""}')
 
         if len(matranA) == dimR:
-            self.__buoc_giai__(f'\nBước 2: Tiến hành kiểm tra tính độc lập tuyến tính của tập hợp vector {ten_tap_hop}')
+            self.__buoc_giai__(f'\nBước 2: Tiến hành kiểm tra tính độc lập tuyến tính của {ten_tap_hop}')
 
             detA = self.tinh_det(matranA)
             self.__buoc_giai__(f'\tTính được detA = {detA}{"" if detA == 0.0 else " != 0"}')
