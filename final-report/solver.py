@@ -1,6 +1,9 @@
 import numpy as np
 import constants
 import data
+from functools import reduce 
+import re
+import numpy as np
 
 from sympy import Matrix, init_printing
 init_printing(use_unicode=True)
@@ -14,16 +17,35 @@ class BaiToan(object):
     def __init__(self, de_bai=None):
         if de_bai:
             [dang, du_lieu] = self.phan_tich(de_bai)
-            self.dang_bai_toan = dang
+            self.dang_bai_toan = dang[0]
             self.du_lieu = du_lieu
 
     def nhap_du_lieu(self, du_lieu):
         self.du_lieu = du_lieu
 
     def phan_tich(self, de_bai):
-        dang = "tim_co_so"
-        du_lieu = data.tim_co_so["a"]
-        return [dang, du_lieu]
+        key = self.type_problem(de_bai)
+        if (key[0] == "kiem_tra_thtt"):
+            vector_space = self.extract_vector(de_bai)
+            data = {'target': vector_space[0] , 'given': vector_space[1:]}
+        elif (key[0] == "kiem_tra_dltt"):
+            vector_space = self.extract_vector(de_bai)
+            data = {'given': vector_space}
+        elif (key[0] == "kiem_tra_co_so"):
+            pattern = ''
+            for i, char in enumerate(de_bai):
+                if char in {'R', 'Real'}:
+                    pattern += de_bai[i:i+4]
+            de_bai = de_bai.replace(pattern,'');
+            vector_space = self.extract_vector(de_bai)
+            space = int(re.findall('([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', pattern)[0])
+            data = {"given": vector_space, "dimR": space}
+        elif (key[0] == "tim_co_so"):
+            vector_space = self.extract_vector(de_bai)
+            data = {'given': vector_space}
+        else:
+            return False
+        return [key, data]
 
     def giai(self):
         if not self.du_lieu:
@@ -204,6 +226,58 @@ class BaiToan(object):
             lead += 1
             self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
         return matrix
+
+    def type_problem(self, de_bai):
+        dang = []
+        for pattern in constants.CONST_THTT:
+            if (de_bai.find(pattern) != -1):
+                dang.append("kiem_tra_thtt")
+                return dang
+        for pattern in constants.CONST_DLTT:
+            if (de_bai.find(pattern) != -1):
+                dang.append("kiem_tra_dltt")
+                return dang
+        for pattern in constants.CONST_KTCS:
+            if (de_bai.find(pattern) != -1):
+                dang.append("kiem_tra_co_so")
+                return dang
+        for pattern in constants.CONST_TCS:
+            if (de_bai.find(pattern) != -1):
+                dang.append("tim_co_so")
+                return dang
+
+    def extract_vector(self, de_bai):
+        process1 = re.split("[a-zA-Z]([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)", de_bai)
+        if len(process1) == 1:
+            process1 = re.split('_([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', process1[0])
+        results = []
+        if len(process1) == 1:
+            x = re.findall('([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', process1[0])
+            results = x
+        else:
+            for process in process1:
+                process2 = re.split("_([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)", process)
+                for path in process2:
+                    if (len(path) == 1 or path is None):
+                        del path
+                    else:
+                        x = re.findall('([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', path)
+                        results.append(x)
+
+        for result in results:
+            if (len(result) == 0):
+                results.remove(result)
+
+        if type(results[0]) is not str:
+            data = reduce(lambda a, b: a+b, results)
+        else:
+            data = results
+
+        data = [int(string) for string in data]
+
+        numEq = de_bai.count("(")
+        data = np.array_split(data, numEq)
+        return data
 
     def __kiem_tra_du_lieu__(self, req_fields):
         for field in req_fields:
