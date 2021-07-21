@@ -21,3 +21,4 @@ if __name__ == '__main__':
     bai_toan = solver.BaiToan(de_bai)
     bai_toan.giai()
     bai_toan.xuat_ket_qua()
+    # bai_toan.xuat_ket_qua(last_only=True)

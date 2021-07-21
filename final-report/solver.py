@@ -1,11 +1,12 @@
 import numpy as np
 import constants
 import data
-from functools import reduce 
+from functools import reduce
 import re
 import numpy as np
 
 from sympy import Matrix, init_printing
+
 init_printing(use_unicode=True)
 
 
@@ -29,24 +30,24 @@ class BaiToan(object):
             pattern = ''
             for i, char in enumerate(de_bai):
                 if char in {'R', 'Real'}:
-                    pattern += de_bai[i:i+3]
-            de_bai = de_bai.replace(pattern,'');
+                    pattern += de_bai[i:i + 3]
+            de_bai = de_bai.replace(pattern, '');
             vector_space = self.extract_vector(de_bai)
-            data = {'target': vector_space[0] , 'given': vector_space[1:]}
+            data = {'target': vector_space[0], 'given': vector_space[1:]}
         elif (key[0] == "kiem_tra_dltt"):
             pattern = ''
             for i, char in enumerate(de_bai):
                 if char in {'R', 'Real'}:
-                    pattern += de_bai[i:i+3]
-            de_bai = de_bai.replace(pattern,'');
+                    pattern += de_bai[i:i + 3]
+            de_bai = de_bai.replace(pattern, '');
             vector_space = self.extract_vector(de_bai)
             data = {'given': vector_space}
         elif (key[0] == "kiem_tra_co_so"):
             pattern = ''
             for i, char in enumerate(de_bai):
                 if char in {'R', 'Real'}:
-                    pattern += de_bai[i:i+4]
-            de_bai = de_bai.replace(pattern,'');
+                    pattern += de_bai[i:i + 4]
+            de_bai = de_bai.replace(pattern, '');
             vector_space = self.extract_vector(de_bai)
             space = int(re.findall('([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', pattern)[0])
             data = {"given": vector_space, "dimR": space}
@@ -86,11 +87,14 @@ class BaiToan(object):
         print("- Dạng bài toán:", constants.DANG_BAI_TOAN[self.dang_bai_toan])
         print("- Dữ liệu:", self.du_lieu)
 
-    def xuat_ket_qua(self):
+    def xuat_ket_qua(self, last_only=False):
         if not self.__error:
             print("\nLời giải:")
-            for step in self.__loi_giai:
-                print(step)
+            if not last_only:
+                for step in self.__loi_giai:
+                    print(step)
+            else:
+                print(self.__loi_giai[-1:])
         else:
             print("\nLỗi:")
             for err in self.__error:
@@ -279,7 +283,7 @@ class BaiToan(object):
                 results.remove(result)
 
         if type(results[0]) is not str:
-            data = reduce(lambda a, b: a+b, results)
+            data = reduce(lambda a, b: a + b, results)
         else:
             data = results
 
