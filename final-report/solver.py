@@ -43,6 +43,8 @@ class BaiToan(object):
             if not self.__error:
                 self.kiem_tra_co_so()
         elif self.dang_bai_toan == constants.TIM_CO_SO:
+            self.__kiem_tra_du_lieu__(["given"])
+            if not self.__error:
                 self.tim_co_so()
         else:
             self.__buoc_giai__("Không xác định được dạng bài toán.")
