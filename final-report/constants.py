@@ -9,3 +9,8 @@ DANG_BAI_TOAN = {
     KIEM_TRA_CO_SO: "Kiểm tra cơ sở của không gian vector",
     TIM_CO_SO: "Tìm cơ sở cho không gian sinh bởi một tập hợp",
 }
+
+CONST_THTT = {'tổ hợp tuyến tính', 'thtt', 'to hop tuyen tinh'}
+CONST_DLTT = {'độc lập tuyến tính', 'đltt', 'phụ thuộc tuyến tính', 'pttt'}
+CONST_KTCS = {'R', 'kiểm tra', 'Kiểm tra'}
+CONST_TCS = {'sinh bởi'}
