@@ -26,9 +26,19 @@ class BaiToan(object):
     def phan_tich(self, de_bai):
         key = self.type_problem(de_bai)
         if (key[0] == "kiem_tra_thtt"):
+            pattern = ''
+            for i, char in enumerate(de_bai):
+                if char in {'R', 'Real'}:
+                    pattern += de_bai[i:i+3]
+            de_bai = de_bai.replace(pattern,'');
             vector_space = self.extract_vector(de_bai)
             data = {'target': vector_space[0] , 'given': vector_space[1:]}
         elif (key[0] == "kiem_tra_dltt"):
+            pattern = ''
+            for i, char in enumerate(de_bai):
+                if char in {'R', 'Real'}:
+                    pattern += de_bai[i:i+3]
+            de_bai = de_bai.replace(pattern,'');
             vector_space = self.extract_vector(de_bai)
             data = {'given': vector_space}
         elif (key[0] == "kiem_tra_co_so"):
