@@ -6,7 +6,6 @@ bai_toan = solver.BaiToan()
 
 
 class TestToHopTuyenTinh(unittest.TestCase):
-
     def test_valid(self):
         bai_toan.nhap_du_lieu(kiem_tra_thtt["a"])
         result = bai_toan.kiem_tra_thtt()
