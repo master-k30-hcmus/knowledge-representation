@@ -28,9 +28,19 @@ class PhanTich(object):
             return [None, None]
 
         if key == constants.KIEM_TRA_THTT:
+            pattern = ''
+            for i, char in enumerate(self.de_bai):
+                if char in {'R', 'Real'}:
+                    pattern += self.de_bai[i:i + 3]
+            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             data = {'target': vector_space[0], 'given': vector_space[1:]}
         elif key == constants.KIEM_TRA_DLTT:
+            pattern = ''
+            for i, char in enumerate(self.de_bai):
+                if char in {'R', 'Real'}:
+                    pattern += self.de_bai[i:i + 3]
+            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             data = {'given': vector_space}
         elif key == constants.KIEM_TRA_CO_SO:
@@ -38,7 +48,7 @@ class PhanTich(object):
             for i, char in enumerate(self.de_bai):
                 if char in {'R', 'Real'}:
                     pattern += self.de_bai[i:i + 4]
-            de_bai = self.de_bai.replace(pattern, '')
+            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             space = int(re.findall(r'([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', pattern)[0])
             data = {"given": vector_space, "dimR": space}

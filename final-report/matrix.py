@@ -12,19 +12,19 @@ class MatrixUtils(object):
                 matrix_str += f'\t|\t{str(row[split_at:][0])}'
         return matrix_str
 
-    @staticmethod
-    def ma_tran_bac_thang(matrix):
+    def ma_tran_bac_thang(self, matrix, steps=None, free_coef=None):
         if not matrix:
             return
 
-        steps = []
+        if steps is None:
+            steps = []
 
         lead = 0
         row_count = matrix.shape[0]
         col_count = matrix.shape[1]
         for r in range(row_count):
             if lead >= col_count:
-                return [matrix, steps]
+                return matrix
             i = r
             while matrix[i, lead] == 0:
                 i += 1
@@ -32,19 +32,24 @@ class MatrixUtils(object):
                     i = r
                     lead += 1
                     if col_count == lead:
-                        return [matrix, steps]
+                        return matrix
 
             matrix[i, :], matrix[r, :] = matrix[r, :], matrix[i, :]
             # Phân tử nhân
             lv = matrix[r, lead]
             matrix[r, :] = matrix[r, :] / lv
+
+            steps.append(f'\nLần lượt thực hiện phép biến đổi sơ cấp trên các dòng sau:')
+            if lv != 1:
+                steps.append(f'  - dòng_{r+1} = dòng_{r+1}/({lv})')
             for i in range(row_count):
                 if i != r:
                     lv = matrix[i, lead]
                     matrix[i, :] = matrix[i, :] - lv * matrix[r, :]
+                    steps.append(f'  - dòng_{i+1} = dòng_{i+1} - ({lv})*dòng_{r+1}')
             lead += 1
-            steps.append(matrix)
-        return [matrix, steps]
+            steps.append(self.print_ma_tran(matrix.tolist(), prefix='\t', split_at=free_coef))
+        return matrix
 
     @staticmethod
     def tinh_hang(matrix):

@@ -65,10 +65,6 @@ class BaiToan(object):
             print("\nLỗi:")
             for err in self.__error:
                 print(err)
-        elif self.__loi_giai:
-            print("\nLời giải:")
-            for step in self.__loi_giai:
-                print(step)
 
     def kiem_tra_thtt(self):
         ket_qua = True
@@ -83,9 +79,10 @@ class BaiToan(object):
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix_eq.tolist(), prefix='\t', split_at=he_so_tu_do))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang sử dụng biến đổi sơ cấp trên dòng')
-        [echelon_matrix, steps] = self.matrix_utils.ma_tran_bac_thang(matrix_eq)
-        for m in steps:
-            self.__buoc_giai__(self.matrix_utils.print_ma_tran(m.tolist(), prefix='\t', split_at=he_so_tu_do))
+        steps = []
+        echelon_matrix = self.matrix_utils.ma_tran_bac_thang(matrix_eq, steps, free_coef=he_so_tu_do)
+        for step in steps:
+            self.__buoc_giai__(step)
 
         for row in range(echelon_matrix.shape[0]):
             sum_row = sum(np.array(echelon_matrix[row, :given.shape[0]]).squeeze())
@@ -93,7 +90,7 @@ class BaiToan(object):
                 self.__buoc_giai__(f'\tHệ phương trình vô nghiệm')
                 ket_qua = False
 
-        self.__buoc_giai__(f'\nKết luận: u{"" if ket_qua else " không"} là tổ hợp tuyến tính của các vector đã cho')
+        self.__buoc_giai__(f'\nKết luận: u{"" if ket_qua else " không"} là tổ hợp tuyến tính của các vector đã cho.')
         return ket_qua
 
     def kiem_tra_dltt(self):
@@ -106,9 +103,10 @@ class BaiToan(object):
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
-        [echelon_matrix, steps] = self.matrix_utils.ma_tran_bac_thang(matrix)
-        for m in steps:
-            self.__buoc_giai__(self.matrix_utils.print_ma_tran(m.tolist(), prefix='\t'))
+        steps = []
+        echelon_matrix = self.matrix_utils.ma_tran_bac_thang(matrix, steps)
+        for step in steps:
+            self.__buoc_giai__(step)
 
         self.__buoc_giai__(f'\nBước 3: Xác định hạng của ma trận')
         rank = self.matrix_utils.tinh_hang(echelon_matrix)
@@ -117,7 +115,7 @@ class BaiToan(object):
             ket_qua = False
 
         self.__buoc_giai__(
-            f'\nKết luận: tập vector đã cho {"độc lập tuyến tính" if ket_qua else "phụ thuộc tuyến tính"}')
+            f'\nKết luận: tập vector đã cho {"độc lập tuyến tính" if ket_qua else "phụ thuộc tuyến tính"}.')
         return ket_qua
 
     def kiem_tra_co_so(self):
@@ -143,7 +141,7 @@ class BaiToan(object):
             if dltt:
                 ket_qua = True
 
-        self.__buoc_giai__(f'\nKết luận: {ten_tap_hop}{"" if ket_qua else " không"} là cơ sở của R^{dimR}')
+        self.__buoc_giai__(f'\nKết luận: {ten_tap_hop}{"" if ket_qua else " không"} là cơ sở của R^{dimR}.')
         return ket_qua
 
     def tim_co_so(self):
@@ -154,17 +152,17 @@ class BaiToan(object):
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
-        [echelon_matrix, steps] = self.matrix_utils.ma_tran_bac_thang(matrix)
-        for m in steps:
-            self.__buoc_giai__(self.matrix_utils.print_ma_tran(m.tolist(), prefix='\t'))
-        self.__buoc_giai__(self.matrix_utils.print_ma_tran(echelon_matrix.tolist(), prefix='\t'))
+        steps = []
+        echelon_matrix = self.matrix_utils.ma_tran_bac_thang(matrix, steps)
+        for step in steps:
+            self.__buoc_giai__(step)
 
         tap_co_so = []
         for row in range(echelon_matrix.shape[0]):
             sum_row = sum(np.array(echelon_matrix[row, :]).squeeze())
             if sum_row != 0:
                 tap_co_so.append(echelon_matrix[row, :].tolist()[0])
-        self.__buoc_giai__(f'\nKết luận: {tap_co_so} là một cơ sở của W')
+        self.__buoc_giai__(f'\nKết luận: {tap_co_so} là một cơ sở của W.')
         return tap_co_so
 
     def __kiem_tra_du_lieu__(self, req_fields):
