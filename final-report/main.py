@@ -1,5 +1,6 @@
 import argparse
 import solver
+import utils
 
 
 def usage():
@@ -16,7 +17,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     de_bai = args.de_bai
-    print("Đề bài:", de_bai)
+    utils.print_box_wrapper([f"Đề bài: {de_bai}"])
 
     bai_toan = solver.BaiToan(de_bai)
     bai_toan.giai()

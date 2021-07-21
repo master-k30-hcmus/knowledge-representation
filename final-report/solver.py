@@ -99,7 +99,6 @@ class BaiToan(object):
 
         self.__buoc_giai__(f'\nBước 1: Ma trận hóa')
         matrix = Matrix(given)
-        print("matrix", matrix)
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
