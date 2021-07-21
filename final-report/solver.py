@@ -99,7 +99,7 @@ class BaiToan(object):
         self.__buoc_giai__(self.print_ma_tran(matrix_eq.tolist(), prefix='\t', split_at=he_so_tu_do))
 
         self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang sử dụng biến đổi sơ cấp trên dòng')
-        echelon_matrix = self.ma_tran_bac_thang(matrix_eq)
+        echelon_matrix = self.ma_tran_bac_thang(matrix_eq, split_at=he_so_tu_do)
         self.__buoc_giai__(self.print_ma_tran(echelon_matrix.tolist(), prefix='\t', split_at=he_so_tu_do))
 
         for row in range(echelon_matrix.shape[0]):
@@ -197,7 +197,7 @@ class BaiToan(object):
                 rank -= 1
         return rank
 
-    def ma_tran_bac_thang(self, matrix):
+    def ma_tran_bac_thang(self, matrix, split_at=None):
         if not matrix:
             return
         lead = 0
@@ -224,7 +224,7 @@ class BaiToan(object):
                     lv = matrix[i, lead]
                     matrix[i, :] = matrix[i, :] - lv * matrix[r, :]
             lead += 1
-            self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t'))
+            self.__buoc_giai__(self.print_ma_tran(matrix.tolist(), prefix='\t', split_at=split_at))
         return matrix
 
     def type_problem(self, de_bai):
