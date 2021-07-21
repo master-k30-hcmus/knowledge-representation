@@ -51,7 +51,7 @@ class BaiToan(object):
 
         print("\nPhân tích bài toán:")
         print("- Dạng bài toán:", constants.DANG_BAI_TOAN[self.dang_bai_toan])
-        print("- Dữ liệu:", self.du_lieu)
+        print("- Dữ liệu:", self.__in_du_lieu__())
 
     def xuat_ket_qua(self, last_only=False):
         if not self.__error:
@@ -129,7 +129,7 @@ class BaiToan(object):
         matrix = Matrix(given)
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
         self.__buoc_giai__(
-            f'\tTa có dimA = {len(given)}{f" không bằng dimR = {dimR}" if len(given) != dimR else ""}')
+            f'\n  Ta có dimA = {len(given)}{f" không bằng dimR = {dimR}" if len(given) != dimR else ""}')
 
         if len(given) == dimR:
             self.__buoc_giai__(f'\nBước 2: Tiến hành kiểm tra tính độc lập tuyến tính của {ten_tap_hop}')
@@ -172,3 +172,13 @@ class BaiToan(object):
 
     def __buoc_giai__(self, step):
         self.__loi_giai.append(step)
+
+    def __in_du_lieu__(self):
+        output_str = ""
+        vector_str = ""
+        if "dimR" in self.du_lieu:
+            output_str += f'\n\tKhông gian R^{self.du_lieu["dimR"]}'
+        for v in self.du_lieu["given"]:
+            vector_str += f"{tuple(v)}, "
+        output_str += "\n\tCác vectors: " + vector_str[:-2]
+        return output_str
