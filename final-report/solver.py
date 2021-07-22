@@ -78,7 +78,7 @@ class BaiToan(object):
         matrix_eq = Matrix(matrix.T)
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix_eq.tolist(), prefix='\t', split_at=he_so_tu_do))
 
-        self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang sử dụng biến đổi sơ cấp trên dòng')
+        self.__buoc_giai__(f'\nBước 2: Biến đổi về ma trận bậc thang')
         steps = []
         echelon_matrix = self.matrix_utils.ma_tran_bac_thang(matrix_eq, steps, free_coef=he_so_tu_do)
         for step in steps:
@@ -87,7 +87,7 @@ class BaiToan(object):
         for row in range(echelon_matrix.shape[0]):
             sum_row = sum(np.array(echelon_matrix[row, :given.shape[0]]).squeeze())
             if sum_row == 0 and echelon_matrix[row, -1] != 0:
-                self.__buoc_giai__(f'\tHệ phương trình vô nghiệm')
+                self.__buoc_giai__(f'  Vậy hệ phương trình vô nghiệm.')
                 ket_qua = False
 
         self.__buoc_giai__(f'\nKết luận: u{"" if ket_qua else " không"} là tổ hợp tuyến tính của các vector đã cho.')
@@ -128,14 +128,15 @@ class BaiToan(object):
         matrix = Matrix(given)
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
         self.__buoc_giai__(
-            f'\n  Ta có dimA = {len(given)}{f" không bằng dimR = {dimR}" if len(given) != dimR else ""}')
+            f'\n  Ta có dimA = {len(given)}{f" không" if len(given) != dimR else ""} bằng dimR = {dimR}')
 
         if len(given) == dimR:
             self.__buoc_giai__(f'\nBước 2: Tiến hành kiểm tra tính độc lập tuyến tính của {ten_tap_hop}')
             detA = self.matrix_utils.tinh_det(given)
             self.__buoc_giai__(f'\tTính được detA = {detA}{"" if detA == 0.0 else " != 0"}')
 
-            dltt = self.kiem_tra_dltt()
+            # dltt = self.kiem_tra_dltt()
+            dltt = False if detA == 0.0 else True
             self.__buoc_giai__(f'\tSuy ra {ten_tap_hop}{"" if dltt else " không"} độc lập tuyến tính')
             if dltt:
                 ket_qua = True
@@ -146,7 +147,7 @@ class BaiToan(object):
     def tim_co_so(self):
         given = np.array(self.du_lieu["given"])
 
-        self.__buoc_giai__(f'\nBước 1: Lập ma trận A')
+        self.__buoc_giai__(f'\nBước 1: Ma trận hóa')
         matrix = Matrix(given)
         self.__buoc_giai__(self.matrix_utils.print_ma_tran(matrix.tolist(), prefix='\t'))
 
@@ -180,4 +181,6 @@ class BaiToan(object):
         for v in self.du_lieu["given"]:
             vector_str += f"{tuple(v)}, "
         output_str += "\n\tCác vectors: " + vector_str[:-2]
+        if "target" in self.du_lieu:
+            output_str += f'\n\tVector có hệ số tự do: {tuple(self.du_lieu["target"])}'
         return output_str

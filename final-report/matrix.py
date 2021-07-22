@@ -39,14 +39,14 @@ class MatrixUtils(object):
             lv = matrix[r, lead]
             matrix[r, :] = matrix[r, :] / lv
 
-            steps.append(f'\nLần lượt thực hiện phép biến đổi sơ cấp trên các dòng sau:')
+            steps.append(f'\n  Lần lượt thực hiện phép biến đổi sơ cấp trên các dòng sau:')
             if lv != 1:
-                steps.append(f'  - dòng_{r + 1} = dòng_{r + 1}/({lv})')
+                steps.append(f'    - dòng_{r + 1} = dòng_{r + 1}/({lv})')
             for i in range(row_count):
                 if i != r:
                     lv = matrix[i, lead]
                     matrix[i, :] = matrix[i, :] - lv * matrix[r, :]
-                    steps.append(f'  - dòng_{i + 1} = dòng_{i + 1} - ({lv})*dòng_{r + 1}')
+                    steps.append(f'    - dòng_{i + 1} = dòng_{i + 1} - ({lv})*dòng_{r + 1}')
             lead += 1
             steps.append(self.print_ma_tran(matrix.tolist(), prefix='\t', split_at=free_coef))
         return matrix
