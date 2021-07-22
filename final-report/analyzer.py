@@ -16,39 +16,30 @@ class PhanTich(object):
         for pattern in constants.CONST_DLTT:
             if self.de_bai.find(pattern) != -1:
                 return constants.KIEM_TRA_DLTT
-        for pattern in constants.CONST_KTCS:
-            if self.de_bai.find(pattern) != -1:
-                return constants.KIEM_TRA_CO_SO
         for pattern in constants.CONST_TCS:
             if self.de_bai.find(pattern) != -1:
                 return constants.TIM_CO_SO
+        for pattern in constants.CONST_KTCS:
+            if self.de_bai.find(pattern) != -1:
+                return constants.KIEM_TRA_CO_SO
 
     def parse_data(self, key):
         if not key:
             return [None, None]
 
+        pattern = ''
+        for i, char in enumerate(self.de_bai):
+            if char in {'R', 'Real'}:
+                pattern += self.de_bai[i:i + 3]
+        self.de_bai = self.de_bai.replace(pattern, '')
+
         if key == constants.KIEM_TRA_THTT:
-            pattern = ''
-            for i, char in enumerate(self.de_bai):
-                if char in {'R', 'Real'}:
-                    pattern += self.de_bai[i:i + 3]
-            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             data = {'target': vector_space[0], 'given': vector_space[1:]}
         elif key == constants.KIEM_TRA_DLTT:
-            pattern = ''
-            for i, char in enumerate(self.de_bai):
-                if char in {'R', 'Real'}:
-                    pattern += self.de_bai[i:i + 3]
-            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             data = {'given': vector_space}
         elif key == constants.KIEM_TRA_CO_SO:
-            pattern = ''
-            for i, char in enumerate(self.de_bai):
-                if char in {'R', 'Real'}:
-                    pattern += self.de_bai[i:i + 4]
-            self.de_bai = self.de_bai.replace(pattern, '')
             vector_space = self.extract_vector()
             space = int(re.findall(r'([+\-]?\d+\.?\d*|[+\-]?\.\d+[+\-]?\d\.\d+[Ee][+\-]\d\d?)', pattern)[0])
             data = {"given": vector_space, "dimR": space}
