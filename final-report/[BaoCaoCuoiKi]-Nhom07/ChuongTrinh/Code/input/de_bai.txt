@@ -1,0 +1,38 @@
+Kiểm tra tổ hợp tuyến tính
+Xét xem u = (-3, 1, 4) có là tổ hợp tuyến tính của các vectơ u1 = (1, 2, 1), u2 = (-1, -1, 1), u3 = (-2, 1, 1) hay không?
+có
+
+Xét xem u = (4, 3, 5) có là tổ hợp tuyến tính của các vectơ u1 = (1, 2, 5), u2 = (1, 3, 7), u3 = (-2, 3, 4) hay không?
+không
+
+Xét xem u = (4, 3, 10) có là tổ hợp tuyến tính của các vectơ u1 = (1, 2, 5), u2 = (1, 3, 7), u3 = (-2, 3, 4) hay không?
+có
+
+Kiểm tra u = (1,4-7,7) có là tổ hợp tuyến tính của các vectơ u1=(4,1,3,-2), u2=(1,2,-3,2), u3=(16,9,1,-3) hay không?
+
+Kiểm tra độc lập tuyến tính
+Trong không gian R^3 cho các vectơ u1 = (1, 2, -3); u2 = (2, 5, -1); u3 = (1, 1, -9). Hỏi u1, u2, u3 độc lập hay phụ thuộc tuyến tính?
+dltt
+
+Trong không gian R^3 cho các vectơ u1 = (1, 1, 1); u2 = (2, 1, 3); u3 = (1, 2, 0). Hỏi u1, u2, u3 độc lập hay phụ thuộc tuyến tính
+pttt
+
+Trong không gian R^5 cho các vectơ u1 = (1, 2, -3, 5, 1); u2 = (1, 3, -13, 22, -1); u3 = (3, 5, 1, -2, 5). Hãy xét xem u1, u2, u3 độc lập tuyến tính hay phụ thuộc tuyến tính
+pttt
+
+Kiểm tra cơ sở
+Kiểm tra tập hợp B1 = {u1 = (1, 2, 3), u2 = (2, 3, 4)} có là cơ sở của không gian vectơ của R^3?
+không
+
+Kiểm tra tập hợp B2 = {u1 = (2, 1, 3), u2 = (2, 1, 4), u3 = (2, 3, 1), u4 = (3, 4, 5)} có là cơ sở của không gian vectơ của R^3?
+không
+
+Kiểm tra tập hợp B3 = {u1 = (1, -2, 1), u2 = (1, 3, 2), u3 = (-2, 1, -2)} có là cơ sở của không gian vectơ của R^3?
+có
+
+Kiểm tra tập hợp B4 = {u1 = (2, -1, 0), u2 = (1, 2, 3), u3 = (5, 0, 3)} có là cơ sở của không gian vectơ của R^3?
+không
+
+Tìm cơ sở
+Cho W sinh bởi S = {u1, u2, u3, u4} trong đó u1 = (1, 2, 1, 1); u2 = (3, 6, 5, 7); u3 = (4, 8, 6, 8); u4 = (8, 16, 12, 20). Tìm một cơ sở của không gian W.
+Tìm một cơ sở cho không gian con của R^4 sinh bởi các vectơ u1, u2, u3, trong đó u1 = (1, -2, -1, 3); u2 = (2, -4, -3, 0); u3 = (3, -6, -4, 4).
